@@ -22,5 +22,18 @@ namespace Task5.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("@\"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Andzej\\DataBaseTes" +
+            "t.mdf;Integrated Security=True;Connect Timeout=30\"")]
+        public string path {
+            get {
+                return ((string)(this["path"]));
+            }
+            set {
+                this["path"] = value;
+            }
+        }
     }
 }
