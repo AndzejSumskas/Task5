@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
 using System.Collections.Specialized;
+using System.Windows;
 
 namespace Task5
 {
@@ -15,58 +16,79 @@ namespace Task5
     {
         static void Main(string[] args)
         {
-            string path = ConfigurationManager.AppSettings.Get("PerPath");
+            string path = ConfigurationManager.AppSettings.Get("PerPath2");
             SqlConnection con = new SqlConnection($@"{path}");         
             char select = ' ';
 
+
+
+            //try
+            //{
+            //    cnn.Open();
+            //    MessageBox.Show("Connection Open ! ");
+            //    cnn.Close();
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Can not open connection ! ");
+            //}
+
             while (select != '9')
             {
-                con.Open();
-                Console.Clear();
-                Console.WriteLine("Select option:");
-                Console.WriteLine("1 - ReadAllPersons ");
-                Console.WriteLine("2 - WriteAllDataToJson");
-                Console.WriteLine("3 - AddPersonToDB");
-                Console.WriteLine("4 - SearchPersonInDB");
-                Console.WriteLine("5 - UpdatePhoneNumber");
-                Console.WriteLine("6 - DeletePerson");
-                Console.WriteLine("9 - Exit");
-                select = Console.ReadKey().KeyChar;
-                Console.WriteLine();
-                Console.Clear();
-                switch (select)
+                try
                 {
-                    case '1':
-                        //Reads All Persons from local database(PERSONS)
-                        ReadAllPersons(con);
-                        break;
-                    case '2':
-                        //Write All Persons from local database(PERSONS) to json file
-                        WriteAllPersonsToJson(con);
-                        break;
-                    case '3':
-                        //
-                        AddPersonToDataBase(con, CreateNewPerson());
-                        break;
-                    case '4':
-                        //
-                        SearchPersonInDataBase(con);
-                        break;
-                    case '5':
-                        // change person phone number from db
-                        UpdatePersonalData(con);
-                        break;
-                    case '6':
-                        // Delete person from db
-                        DeletePerson(con);
-                        break;
-                    case '9':
-                        break;
-                    default:
-                        Console.WriteLine("Wrong select.");
-                        break;
+                    con.Open();
+                    Console.Clear();
+                    Console.WriteLine("Select option:");
+                    Console.WriteLine("1 - ReadAllPersons ");
+                    Console.WriteLine("2 - WriteAllDataToJson");
+                    Console.WriteLine("3 - AddPersonToDB");
+                    Console.WriteLine("4 - SearchPersonInDB");
+                    Console.WriteLine("5 - UpdatePhoneNumber");
+                    Console.WriteLine("6 - DeletePerson");
+                    Console.WriteLine("9 - Exit");
+                    select = Console.ReadKey().KeyChar;
+                    Console.WriteLine();
+                    Console.Clear();
+                    switch (select)
+                    {
+                        case '1':
+                            //Reads All Persons from local database(PERSONS)
+                            ReadAllPersons(con);
+                            break;
+                        case '2':
+                            //Write All Persons from local database(PERSONS) to json file
+                            WriteAllPersonsToJson(con);
+                            break;
+                        case '3':
+                            //
+                            AddPersonToDataBase(con, CreateNewPerson());
+                            break;
+                        case '4':
+                            //
+                            SearchPersonInDataBase(con);
+                            break;
+                        case '5':
+                            // change person phone number from db
+                            UpdatePersonalData(con);
+                            break;
+                        case '6':
+                            // Delete person from db
+                            DeletePerson(con);
+                            break;
+                        case '9':
+                            break;
+                        default:
+                            Console.WriteLine("Wrong select.");
+                            break;
+                    }
+                    con.Close();
                 }
-                con.Close();
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Can not open connection ! ");
+                }
+
             }        
         }
 
@@ -77,7 +99,7 @@ namespace Task5
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = System.Data.CommandType.Text;
-            cmd.CommandText = $"DELETE FROM PERSONS WHERE ID = {personId}";
+            cmd.CommandText = $"BEGIN TRANSACTION; DELETE FROM PERSONS WHERE ID = {personId}; COMMIT TRANSACTION;";
             cmd.Connection = con;
             cmd.ExecuteNonQuery();
         }
@@ -96,16 +118,16 @@ namespace Task5
             switch (select)
             {
                 case '1':
-                    cmd.CommandText = $"UPDATE PERSONS SET NAME = '{WriteNewName()}' WHERE ID = {personId}";
+                    cmd.CommandText = $"BEGIN TRANSACTION; UPDATE PERSONS SET NAME = '{WriteNewName()}' WHERE ID = {personId}; COMMIT TRANSACTION;";
                     break;
                 case '2':
-                    cmd.CommandText = $"UPDATE PERSONS SET SURNAME = '{WriteNewSurName()}' WHERE ID = {personId}";
+                    cmd.CommandText = $"BEGIN TRANSACTION; UPDATE PERSONS SET SURNAME = '{WriteNewSurName()}' WHERE ID = {personId}; COMMIT TRANSACTION;";
                     break;
                 case '3':
-                    cmd.CommandText = $"UPDATE PERSONS SET PHONENUMBER = '{WriteNewPhoneNumber()}' WHERE ID = {personId}";
+                    cmd.CommandText = $"BEGIN TRANSACTION; UPDATE PERSONS SET PHONENUMBER = '{WriteNewPhoneNumber()}' WHERE ID = {personId}; COMMIT TRANSACTION;";
                     break;
                 case '4':
-                    cmd.CommandText = $"UPDATE PERSONS SET NAME = '{WriteNewName()}',SURNAME = '{WriteNewSurName()}', PHONENUMBER = '{WriteNewPhoneNumber()}' WHERE ID = {personId}";
+                    cmd.CommandText = $"BEGIN TRANSACTION; UPDATE PERSONS SET NAME = '{WriteNewName()}',SURNAME = '{WriteNewSurName()}', PHONENUMBER = '{WriteNewPhoneNumber()}' WHERE ID = {personId}; COMMIT TRANSACTION;";
                     break;
             }
             cmd.ExecuteNonQuery();
@@ -147,7 +169,7 @@ namespace Task5
             Console.WriteLine("Make a search:");
             string search = Console.ReadLine();
 
-            string sql = $"SELECT ID,NAME,SURNAME,PHONENUMBER FROM PERSONS WHERE NAME LIKE '%{search}%' OR SURNAME Like '%{search}%' or PHONENUMBER like '%{search}%' or ID = {search}";
+            string sql = $"BEGIN TRANSACTION; SELECT ID,NAME,SURNAME,PHONENUMBER FROM PERSONS WHERE NAME LIKE '%{search}%' OR SURNAME Like '%{search}%' or PHONENUMBER like '%{search}%'; COMMIT TRANSACTION;";
             SqlCommand command = new SqlCommand(sql, con);
             SqlDataReader dataReader = command.ExecuteReader();
 
@@ -182,7 +204,7 @@ namespace Task5
         {
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = System.Data.CommandType.Text;
-            cmd.CommandText = $"INSERT INTO PERSONS VALUES ('{person.Name}', '{person.SurName}', '{person.PhoneNumber}')";
+            cmd.CommandText = $"BEGIN TRANSACTION; INSERT INTO PERSONS VALUES ('{person.Name}', '{person.SurName}', '{person.PhoneNumber}'); COMMIT TRANSACTION;";
             cmd.Connection = con;
             cmd.ExecuteNonQuery();
         }
@@ -191,7 +213,7 @@ namespace Task5
         public static void ReadAllPersons(SqlConnection con)
         {
             Console.Clear();
-            string sql = "Select ID, NAME, SURNAME, PHONENUMBER from PERSONS";
+            string sql = "BEGIN TRANSACTION; Select ID, NAME, SURNAME, PHONENUMBER from PERSONS; COMMIT TRANSACTION;";
             SqlCommand command = new SqlCommand(sql, con); ;
             SqlDataReader dataReader = command.ExecuteReader();
 
@@ -212,7 +234,7 @@ namespace Task5
             string sql = "";
             List<string> data = new List<string>();
 
-            sql = "Select * from PERSONS";
+            sql = "BEGIN TRANSACTION; Select * from PERSONS; COMMIT TRANSACTION;";
             command = new SqlCommand(sql, con);
             dataReader = command.ExecuteReader();
 
