@@ -13,24 +13,17 @@ namespace Task5
         internal string SurName { get; set; }
         internal string PhoneNumber { get; set; }
 
-        //public Person(string name, string surName, string phoneNumber)
-        //{
-        //    this.name = name;
-        //    this.surName = surName;
-        //    this.phoneNumber = phoneNumber;
-        //}
+        VariableEntries textEntries = new VariableEntries();
 
-        //public string GetName()
-        //{
-        //    return name;
-        //}
-        //public string GetSurName()
-        //{
-        //    return surName;
-        //}
-        //public string GetPhoneNumber()
-        //{
-        //    return phoneNumber;
-        //}
+        public Person CreateNewPerson()
+        {
+            Console.Clear();
+            Person person = new Person();
+            person.Name = textEntries.WriteNewName();
+            person.SurName = textEntries.WriteNewSurName();
+            person.PhoneNumber = textEntries.WriteNewPhoneNumber();
+
+            return person;
+        }
     }
 }
