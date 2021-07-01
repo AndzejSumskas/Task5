@@ -15,37 +15,62 @@ namespace Task5
 
         VariableEntries textEntries= new VariableEntries();
 
-        public void SearchPersonInDataBase(SqlConnection con)
+        public void SearchPersonInDataBase(SqlConnection connection)
         {
-            Console.Clear();
-            Console.WriteLine("Make a search:");
-            string search = Console.ReadLine();
+            connection.Open();
+            SqlCommand command = connection.CreateCommand();
+            SqlTransaction transaction;
 
-            string sql = $"SELECT ID,NAME,SURNAME,PHONENUMBER FROM PERSONS WHERE NAME LIKE '%{search}%' OR SURNAME Like '%{search}%' or PHONENUMBER like '%{search}%'";
+            transaction = connection.BeginTransaction("SampleTransaction");
+
+            command.Connection = connection;
+            command.Transaction = transaction;          
             
-            SqlCommand command = new SqlCommand(sql, con);
-            SqlDataReader dataReader = command.ExecuteReader();
+            try
+            {
+                Console.Clear();
+                Console.WriteLine("Make a search:");
+                string search = Console.ReadLine();
+                command.CommandText =
+                    $"SELECT ID,NAME,SURNAME,PHONENUMBER FROM PERSONS WHERE NAME LIKE '%{search}%' OR SURNAME Like '%{search}%' or PHONENUMBER like '%{search}%'";
+                int searchCount = 0;
+                SqlDataReader dataReader = command.ExecuteReader();
+                Console.WriteLine("Search result:");
+                while (dataReader.Read())
+                {
+                    Console.WriteLine($"{dataReader.GetValue(0)} {dataReader.GetValue(1)} {dataReader.GetValue(2)} {dataReader.GetValue(3)}");
+                    searchCount++;
+                }
+                if (searchCount == 0)
+                {
+                    Console.WriteLine("Person not found");
+                }
+                Console.WriteLine("Press key to continue...");
+                Console.ReadKey();
+                transaction.Commit();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Commit Exception Type: {0}", ex.GetType());
+                Console.WriteLine("  Message: {0}", ex.Message);
 
-            Console.WriteLine("Search result:");
-            int searchCount = 0;
-            while (dataReader.Read())
-            {
-                Console.WriteLine($"{dataReader.GetValue(0)} {dataReader.GetValue(1)} {dataReader.GetValue(2)} {dataReader.GetValue(3)}");
-                searchCount++;
+                // Attempt to roll back the transaction.
+                try
+                {
+                    transaction.Rollback();
+                }
+                catch (Exception ex2)
+                {
+                    Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
+                    Console.WriteLine("  Message: {0}", ex2.Message);
+                }
             }
-            if (searchCount == 0)
-            {
-                Console.WriteLine("Person not found");
-            }
-            Console.WriteLine("Press key to continue...");
-            Console.ReadKey();
+            connection.Close();
         }
 
         public void ReadAllPersons(SqlConnection connection)
         {
             Console.Clear();
-            using (connection)
-            {
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
                 SqlTransaction transaction;
@@ -84,208 +109,226 @@ namespace Task5
                     Console.WriteLine("Press key to continue...");
                     Console.ReadKey();
                 }
-            }
+                connection.Close();
         }
 
-        public void WriteAllPersonsToJson(SqlConnection con)
+        public void WriteAllPersonsToJson(SqlConnection connection)
         {
             Console.Clear();
-            SqlCommand command;
             SqlDataReader dataReader;
-            string sql = "";
             List<string> data = new List<string>();
 
-            sql = "BEGIN TRANSACTION; Select * from PERSONS; COMMIT TRANSACTION;";
-            command = new SqlCommand(sql, con);
-            dataReader = command.ExecuteReader();
+            connection.Open();
 
-            while (dataReader.Read())
+            SqlCommand command = connection.CreateCommand();
+            SqlTransaction transaction;
+
+            transaction = connection.BeginTransaction("WriteAllPersonsToJsonTransaction");
+            command.Connection = connection;
+            command.Transaction = transaction;
+
+            try
             {
-                data.Add($"{dataReader.GetValue(0)} {dataReader.GetValue(1)} {dataReader.GetValue(2)} {dataReader.GetValue(3)}");
+                command.CommandText =
+                     $"Select* from PERSONS";
+                dataReader = command.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    data.Add($"{dataReader.GetValue(0)} {dataReader.GetValue(1)} {dataReader.GetValue(2)} {dataReader.GetValue(3)}");
+                }
+                string json = JsonConvert.SerializeObject(data.ToArray(), Formatting.Indented);
+                File.WriteAllText(@"C:\Users\Andzej\Desktop\IT Tasks\HomeWork\Task5\Task5\path.json", json);
+                Console.WriteLine("All files was writen to json file.");
+                Console.WriteLine("Press key to continue...");
+                Console.ReadKey();
+                transaction.Commit();
             }
-            string json = JsonConvert.SerializeObject(data.ToArray(), Formatting.Indented);
-            File.WriteAllText(@"C:\Users\Andzej\Desktop\IT Tasks\HomeWork\Task5\Task5\path.json", json);
+            catch (Exception ex)
+            {
+                Console.WriteLine("Commit Exception Type: {0}", ex.GetType());
+                Console.WriteLine("  Message: {0}", ex.Message);
+                try
+                {
+                    transaction.Rollback();
+                }
+                catch (Exception ex2)
+                {
+                    Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
+                    Console.WriteLine("  Message: {0}", ex2.Message);
+                }
+            }
+            connection.Close();
 
-
-
-            Console.WriteLine("All files was writen to json file.");
-            Console.WriteLine("Press key to continue...");
-            Console.ReadKey();
         }
 
         internal void DeletePerson(SqlConnection connection)
         {
             int personId = textEntries.EnterIDOfPerson();
 
-            using (connection)
+
+            connection.Open();
+
+            SqlCommand command = connection.CreateCommand();
+            SqlTransaction transaction;
+
+            transaction = connection.BeginTransaction("SampleTransaction");
+            command.Connection = connection;
+            command.Transaction = transaction;
+
+            try
             {
-                connection.Open();
+                command.CommandText =
+                     $"DELETE FROM PERSONS WHERE ID = {personId}";
+                command.ExecuteNonQuery();
 
-                SqlCommand command = connection.CreateCommand();
-                SqlTransaction transaction;
-
-                transaction = connection.BeginTransaction("SampleTransaction");
-                command.Connection = connection;
-                command.Transaction = transaction;
-
+                transaction.Commit();
+                Console.WriteLine("Person was deleted");
+                Console.WriteLine("Press key to continue...");
+                Console.ReadKey();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Commit Exception Type: {0}", ex.GetType());
+                Console.WriteLine("  Message: {0}", ex.Message);
                 try
                 {
-                    command.CommandText =
-                         $"DELETE FROM PERSONS WHERE ID = {personId}";
-                    command.ExecuteNonQuery();
-                   
-                    transaction.Commit();
-                    Console.WriteLine("Person was deleted");
-                    Console.WriteLine("Press key to continue...");
-                    Console.ReadKey();
+                    transaction.Rollback();
                 }
-                catch (Exception ex)
+                catch (Exception ex2)
                 {
-                    Console.WriteLine("Commit Exception Type: {0}", ex.GetType());
-                    Console.WriteLine("  Message: {0}", ex.Message);
-                    try
-                    {
-                        transaction.Rollback();
-                    }
-                    catch (Exception ex2)
-                    {
-                        Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
-                        Console.WriteLine("  Message: {0}", ex2.Message);
-                    }
+                    Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
+                    Console.WriteLine("  Message: {0}", ex2.Message);
                 }
             }
-
+            connection.Close();
         }
 
         public void UpdatePersonalData(SqlConnection connection)
         {
-            using (connection)
+            connection.Open();
+
+            SqlCommand command = connection.CreateCommand();
+            SqlTransaction transaction;
+
+            transaction = connection.BeginTransaction("UpdatePersonTransaction");
+
+            command.Connection = connection;
+            command.Transaction = transaction;
+
+            int personId = textEntries.EnterIDOfPerson();
+            Console.WriteLine("Select option:");
+            Console.WriteLine("1 - Update name\n2 - Update surname\n3 - Update phone number \n4 - Update all person data");
+            char select = Console.ReadKey().KeyChar;
+
+            switch (select)
             {
-                connection.Open();
+                case '1':
+                    command.CommandText = $"BEGIN TRANSACTION; UPDATE PERSONS SET NAME = '{textEntries.WriteNewName()}' WHERE ID = {personId}; COMMIT TRANSACTION;";
+                    break;
+                case '2':
+                    command.CommandText = $"BEGIN TRANSACTION; UPDATE PERSONS SET SURNAME = '{textEntries.WriteNewSurName()}' WHERE ID = {personId}; COMMIT TRANSACTION;";
+                    break;
+                case '3':
+                    command.CommandText = $"BEGIN TRANSACTION; UPDATE PERSONS SET PHONENUMBER = '{textEntries.WriteNewPhoneNumber()}' WHERE ID = {personId}; COMMIT TRANSACTION;";
+                    break;
+                case '4':
+                    command.CommandText = $"BEGIN TRANSACTION; UPDATE PERSONS SET NAME = '{textEntries.WriteNewName()}',SURNAME = '{textEntries.WriteNewSurName()}', PHONENUMBER = '{textEntries.WriteNewPhoneNumber()}' WHERE ID = {personId}; COMMIT TRANSACTION;";
+                    break;
+                default:
+                    Console.WriteLine("Wrong input.");
+                    Console.WriteLine("Select option:");
+                    Console.WriteLine("1 - Update name\n2 - Update surname\n3 - Update phone number \n4 - Update all person data");
+                    break;
+            }
 
-                SqlCommand command = connection.CreateCommand();
-                SqlTransaction transaction;
+            try
+            {
+                command.ExecuteNonQuery();
+                transaction.Commit();
 
-                transaction = connection.BeginTransaction("UpdatePersonTransaction");
+                Console.WriteLine($"Person data was updated.");
+                Console.WriteLine("Press key to continue...");
+                Console.ReadKey();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Commit Exception Type: {0}", ex.GetType());
+                Console.WriteLine("  Message: {0}", ex.Message);
 
-                command.Connection = connection;
-                command.Transaction = transaction;
-
-                int personId = textEntries.EnterIDOfPerson();
-                Console.WriteLine("Select option:");
-                Console.WriteLine("1 - Update name\n2 - Update surname\n3 - Update phone number \n4 - Update all person data");
-                char select = Console.ReadKey().KeyChar;
-
-                switch (select)
-                {
-                    case '1':
-                        command.CommandText = $"BEGIN TRANSACTION; UPDATE PERSONS SET NAME = '{textEntries.WriteNewName()}' WHERE ID = {personId}; COMMIT TRANSACTION;";
-                        break;
-                    case '2':
-                        command.CommandText = $"BEGIN TRANSACTION; UPDATE PERSONS SET SURNAME = '{textEntries.WriteNewSurName()}' WHERE ID = {personId}; COMMIT TRANSACTION;";
-                        break;
-                    case '3':
-                        command.CommandText = $"BEGIN TRANSACTION; UPDATE PERSONS SET PHONENUMBER = '{textEntries.WriteNewPhoneNumber()}' WHERE ID = {personId}; COMMIT TRANSACTION;";
-                        break;
-                    case '4':
-                        command.CommandText = $"BEGIN TRANSACTION; UPDATE PERSONS SET NAME = '{textEntries.WriteNewName()}',SURNAME = '{textEntries.WriteNewSurName()}', PHONENUMBER = '{textEntries.WriteNewPhoneNumber()}' WHERE ID = {personId}; COMMIT TRANSACTION;";
-                        break;
-                    default:
-                        Console.WriteLine("Wrong input.");
-                        Console.WriteLine("Select option:");
-                        Console.WriteLine("1 - Update name\n2 - Update surname\n3 - Update phone number \n4 - Update all person data");
-                        break;
-                }
-
+                // Attempt to roll back the transaction.
                 try
                 {
-                    command.ExecuteNonQuery();
-                    transaction.Commit();
-
-                    Console.WriteLine($"Person data was updated.");
+                    transaction.Rollback();
+                }
+                catch (Exception ex2)
+                {
+                    // This catch block will handle any errors that may have occurred
+                    // on the server that would cause the rollback to fail, such as
+                    // a closed connection.
+                    Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
+                    Console.WriteLine("  Message: {0}", ex2.Message);
                     Console.WriteLine("Press key to continue...");
                     Console.ReadKey();
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Commit Exception Type: {0}", ex.GetType());
-                    Console.WriteLine("  Message: {0}", ex.Message);
-
-                    // Attempt to roll back the transaction.
-                    try
-                    {
-                        transaction.Rollback();
-                    }
-                    catch (Exception ex2)
-                    {
-                        // This catch block will handle any errors that may have occurred
-                        // on the server that would cause the rollback to fail, such as
-                        // a closed connection.
-                        Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
-                        Console.WriteLine("  Message: {0}", ex2.Message);
-                        Console.WriteLine("Press key to continue...");
-                        Console.ReadKey();
-                    }
-                }
             }
-
+            connection.Close();
         }
   
         public void AddPersonToDataBase(SqlConnection connection, Person person)
         {
             int modified = 0;
-            using (connection)
+
+            connection.Open();
+
+            SqlCommand command = connection.CreateCommand();
+            SqlTransaction transaction;
+
+            // Start a local transaction.
+            transaction = connection.BeginTransaction("AddNewPersonTransaction");
+
+            // Must assign both transaction object and connection
+            // to Command object for a pending local transaction
+            command.Connection = connection;
+            command.Transaction = transaction;
+
+            try
             {
-                connection.Open();
+                command.CommandText =
+                    $"INSERT INTO PERSONS(NAME,SURNAME,PHONENUMBER) output INSERTED.ID VALUES('{person.Name}', '{person.SurName}', '{person.PhoneNumber}')";
+                command.ExecuteNonQuery();
+                modified = (int)command.ExecuteScalar();
 
-                SqlCommand command = connection.CreateCommand();
-                SqlTransaction transaction;
+                // Attempt to commit the transaction.
+                transaction.Commit();
 
-                // Start a local transaction.
-                transaction = connection.BeginTransaction("AddNewPersonTransaction");
 
-                // Must assign both transaction object and connection
-                // to Command object for a pending local transaction
-                command.Connection = connection;
-                command.Transaction = transaction;
-                
+                Console.WriteLine($"Last added peson ID = {modified}");
+                Console.WriteLine("Press key to continue...");
+                Console.ReadKey();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Commit Exception Type: {0}", ex.GetType());
+                Console.WriteLine("  Message: {0}", ex.Message);
+
+                // Attempt to roll back the transaction.
                 try
                 {
-                    command.CommandText =
-                        $"INSERT INTO PERSONS(NAME,SURNAME,PHONENUMBER) output INSERTED.ID VALUES('{person.Name}', '{person.SurName}', '{person.PhoneNumber}')";
-                    command.ExecuteNonQuery();
-                    modified = (int)command.ExecuteScalar();
-
-                    // Attempt to commit the transaction.
-                    transaction.Commit();
-                    
-
-                    Console.WriteLine($"Last added peson ID = {modified}");
+                    transaction.Rollback();
+                }
+                catch (Exception ex2)
+                {
+                    // This catch block will handle any errors that may have occurred
+                    // on the server that would cause the rollback to fail, such as
+                    // a closed connection.
+                    Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
+                    Console.WriteLine("  Message: {0}", ex2.Message);
                     Console.WriteLine("Press key to continue...");
                     Console.ReadKey();
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Commit Exception Type: {0}", ex.GetType());
-                    Console.WriteLine("  Message: {0}", ex.Message);
-
-                    // Attempt to roll back the transaction.
-                    try
-                    {
-                        transaction.Rollback();
-                    }
-                    catch (Exception ex2)
-                    {
-                        // This catch block will handle any errors that may have occurred
-                        // on the server that would cause the rollback to fail, such as
-                        // a closed connection.
-                        Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
-                        Console.WriteLine("  Message: {0}", ex2.Message);
-                        Console.WriteLine("Press key to continue...");
-                        Console.ReadKey();
-                    }
-                }
             }
+            connection.Close();
         }
     }
 }
