@@ -15,6 +15,16 @@ namespace Task5
 
         VariableEntries textEntries = new VariableEntries();
 
+        internal List<string> persons = new List<string>();
+
+        //public Person(int id, string name, string surName, string phoneNumber)
+        //{
+        //    Id = id;
+        //    Name = name;
+        //    SurName = surName;
+        //    PhoneNumber = phoneNumber;
+        //}
+
         public Person CreateNewPerson()
         {
             Console.Clear();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -7,19 +8,22 @@ using System.Threading.Tasks;
 
 namespace Task5
 {
-    class test
+    class AppController
     {
-        public static void ExecuteSqlTransaction(SqlConnection connection)
+        private PersonDAL personDAL = new PersonDAL();
+        private List<string> persons = new List<string>();
+
+        public void ExecuteSqlTransaction(string connectionString)
         {
-            using (connection)
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
 
                 SqlCommand command = connection.CreateCommand();
                 SqlTransaction transaction;
 
-                // Start a local transaction.
-                transaction = connection.BeginTransaction("SampleTransaction");
+                // Start transaction.
+                transaction = connection.BeginTransaction("Transaction");
 
                 // Must assign both transaction object and connection
                 // to Command object for a pending local transaction
@@ -28,17 +32,28 @@ namespace Task5
 
                 try
                 {
-                    command.CommandText =
-                        "Insert into PERSONS (NAME,SURNAME, PHONENUMBER) VALUES ('Petras', 'Grazulis', '+37065213256')";
-                    command.ExecuteNonQuery();
-                    command.CommandText =
-                        "Insert into PERSONS (NAME,SURNAME, PHONENUMBER) VALUES ('Pranas', 'Petrulis', '+37065256356')";
-                    command.ExecuteNonQuery();
+                    Console.Clear();
 
-                    // Attempt to commit the transaction.
-                    transaction.Commit();
-                    Console.WriteLine("Both records are written to database.");
+                    //personDAL.ReadAllPersons(command, transaction);
+                    //persons = personDAL.GetListOfPersonsFromDB(command, transaction);
+
+                    Person person = new Person();
+                    person.Name = "Ruta";
+                    person.SurName = "Jakimaliene";
+                    person.PhoneNumber = "+37065412224";
+                    //personDAL.AddNewPersonToDataBase(command, transaction, person);
+
+                    //personDAL.SearchPersonInDataBase(connection, transaction, command, "lo");
+
+
+                    //personDAL.UpdatePersonalData(connection, transaction, command, 3, '2', "", "Gerdauskas", "");
+
+                    personDAL.DeletePerson(connection, transaction, command, 94);
+
+                    Console.WriteLine("Press key to continue...");
+                    Console.ReadKey();
                 }
+                
                 catch (Exception ex)
                 {
                     Console.WriteLine("Commit Exception Type: {0}", ex.GetType());
@@ -57,8 +72,11 @@ namespace Task5
                         Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
                         Console.WriteLine("  Message: {0}", ex2.Message);
                     }
+                    Console.WriteLine("Press key to continue...");
+                    Console.ReadKey();
                 }
             }
         }
+
     }
 }

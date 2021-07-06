@@ -21,7 +21,7 @@ namespace Task5
             SqlCommand command = connection.CreateCommand();
             SqlTransaction transaction;
 
-            transaction = connection.BeginTransaction("SampleTransaction");
+            transaction = connection.BeginTransaction("Transaction");
 
             command.Connection = connection;
             command.Transaction = transaction;          
@@ -31,8 +31,8 @@ namespace Task5
                 Console.Clear();
                 Console.WriteLine("Make a search:");
                 string search = Console.ReadLine();
-                command.CommandText =
-                    $"SELECT ID,NAME,SURNAME,PHONENUMBER FROM PERSONS WHERE NAME LIKE '%{search}%' OR SURNAME Like '%{search}%' or PHONENUMBER like '%{search}%'";
+                command.CommandText = $"exec SearchAllPersons @Search = '{search}'";
+                    //$"SELECT ID,NAME,SURNAME,PHONENUMBER FROM PERSONS WHERE NAME LIKE '%{search}%' OR SURNAME Like '%{search}%' or PHONENUMBER like '%{search}%'";
                 int searchCount = 0;
                 SqlDataReader dataReader = command.ExecuteReader();
                 Console.WriteLine("Search result:");
@@ -130,7 +130,7 @@ namespace Task5
             try
             {
                 command.CommandText =
-                     $"Select* from PERSONS";
+                     $"Select ID, NAME, SURNAME, PHONENUMBER from PERSONS";
                 dataReader = command.ExecuteReader();
 
                 while (dataReader.Read())
@@ -165,7 +165,6 @@ namespace Task5
         internal void DeletePerson(SqlConnection connection)
         {
             int personId = textEntries.EnterIDOfPerson();
-
 
             connection.Open();
 
@@ -263,9 +262,6 @@ namespace Task5
                 }
                 catch (Exception ex2)
                 {
-                    // This catch block will handle any errors that may have occurred
-                    // on the server that would cause the rollback to fail, such as
-                    // a closed connection.
                     Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
                     Console.WriteLine("  Message: {0}", ex2.Message);
                     Console.WriteLine("Press key to continue...");
@@ -284,11 +280,7 @@ namespace Task5
             SqlCommand command = connection.CreateCommand();
             SqlTransaction transaction;
 
-            // Start a local transaction.
             transaction = connection.BeginTransaction("AddNewPersonTransaction");
-
-            // Must assign both transaction object and connection
-            // to Command object for a pending local transaction
             command.Connection = connection;
             command.Transaction = transaction;
 
@@ -299,7 +291,6 @@ namespace Task5
                 command.ExecuteNonQuery();
                 modified = (int)command.ExecuteScalar();
 
-                // Attempt to commit the transaction.
                 transaction.Commit();
 
 
@@ -312,16 +303,12 @@ namespace Task5
                 Console.WriteLine("Commit Exception Type: {0}", ex.GetType());
                 Console.WriteLine("  Message: {0}", ex.Message);
 
-                // Attempt to roll back the transaction.
                 try
                 {
                     transaction.Rollback();
                 }
                 catch (Exception ex2)
                 {
-                    // This catch block will handle any errors that may have occurred
-                    // on the server that would cause the rollback to fail, such as
-                    // a closed connection.
                     Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
                     Console.WriteLine("  Message: {0}", ex2.Message);
                     Console.WriteLine("Press key to continue...");
