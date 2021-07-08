@@ -17,13 +17,17 @@ namespace Task5
 
         internal List<string> persons = new List<string>();
 
-        //public Person(int id, string name, string surName, string phoneNumber)
-        //{
-        //    Id = id;
-        //    Name = name;
-        //    SurName = surName;
-        //    PhoneNumber = phoneNumber;
-        //}
+        public Person()
+        {
+        }
+
+        public Person(int id, string name, string surName, string phoneNumber)
+        {
+            Id = id;
+            Name = name;
+            SurName = surName;
+            PhoneNumber = phoneNumber;
+        }
 
         public Person CreateNewPerson()
         {

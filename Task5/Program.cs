@@ -25,7 +25,9 @@ namespace Task5
             
             AppController appController = new AppController();
 
-            appController.ExecuteSqlTransaction(path);
+            //appController.ExecuteSqlTransaction(path);
+
+            appController.StartApplication(path);
 
 
 

@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,73 +12,41 @@ namespace Task5
 {
     class AppController
     {
-        private PersonDAL personDAL = new PersonDAL();
-        private List<string> persons = new List<string>();
+        private char select = ' ';
 
-        public void ExecuteSqlTransaction(string connectionString)
+        Transaction transaction = new Transaction();
+
+        public void StartApplication(string connectionString)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            while (select != 'q')
             {
-                connection.Open();
+                Console.Clear();
+                Console.WriteLine("Select option:");
+                Console.WriteLine("a - Print all persons ");
+                Console.WriteLine("b - Write all personts to Json file");
+                Console.WriteLine("c - Add new person to DB");
+                Console.WriteLine("d - Search person in DB");
+                Console.WriteLine("e - Update person in DB");
+                Console.WriteLine("f - Delete person from DB");
+                Console.WriteLine("g - Print all debts ");
+                Console.WriteLine("h - Write all debts to Json file");
+                Console.WriteLine("i - Add new debt to DB");
+                Console.WriteLine("j - Search debts in DB");
+                Console.WriteLine("l - Update debt in DB");
+                Console.WriteLine("m - Delete debt from DB");
 
-                SqlCommand command = connection.CreateCommand();
-                SqlTransaction transaction;
-
-                // Start transaction.
-                transaction = connection.BeginTransaction("Transaction");
-
-                // Must assign both transaction object and connection
-                // to Command object for a pending local transaction
-                command.Connection = connection;
-                command.Transaction = transaction;
-
-                try
-                {
-                    Console.Clear();
-
-                    //personDAL.ReadAllPersons(command, transaction);
-                    //persons = personDAL.GetListOfPersonsFromDB(command, transaction);
-
-                    Person person = new Person();
-                    person.Name = "Ruta";
-                    person.SurName = "Jakimaliene";
-                    person.PhoneNumber = "+37065412224";
-                    //personDAL.AddNewPersonToDataBase(command, transaction, person);
-
-                    //personDAL.SearchPersonInDataBase(connection, transaction, command, "lo");
+                Console.WriteLine("q - Exit");
 
 
-                    //personDAL.UpdatePersonalData(connection, transaction, command, 3, '2', "", "Gerdauskas", "");
+                select = Console.ReadKey().KeyChar;
+                Console.WriteLine();
 
-                    personDAL.DeletePerson(connection, transaction, command, 94);
+                transaction.ExecuteSqlTransaction(connectionString, select);
 
-                    Console.WriteLine("Press key to continue...");
-                    Console.ReadKey();
-                }
-                
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Commit Exception Type: {0}", ex.GetType());
-                    Console.WriteLine("  Message: {0}", ex.Message);
-
-                    // Attempt to roll back the transaction.
-                    try
-                    {
-                        transaction.Rollback();
-                    }
-                    catch (Exception ex2)
-                    {
-                        // This catch block will handle any errors that may have occurred
-                        // on the server that would cause the rollback to fail, such as
-                        // a closed connection.
-                        Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
-                        Console.WriteLine("  Message: {0}", ex2.Message);
-                    }
-                    Console.WriteLine("Press key to continue...");
-                    Console.ReadKey();
-                }
             }
         }
+
+       
 
     }
 }

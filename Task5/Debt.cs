@@ -13,5 +13,32 @@ namespace Task5
         internal int PersonId { get; set; }
         internal double DeptAmount { get; set; }
 
+        private VariableEntries variableEntries = new VariableEntries();
+
+        public Debt()
+        {
+        }
+
+        public Debt(int personId, DateTime date, double deptAmount)
+        {
+            PersonId = personId;
+            Date = date;
+            DeptAmount = deptAmount;
+        }
+
+        public Debt(int id, int personId, DateTime date, double deptAmount)
+        {
+            Id = id;
+            PersonId = personId;
+            Date = date;
+            DeptAmount = deptAmount;
+        }
+
+        internal Debt CreateNeDebt()
+        {
+            Debt debt = new Debt(variableEntries.EnterPersonID(), DateTime.Now, variableEntries.EnterDebtAmount());
+
+            return debt;
+        }
     }
 }

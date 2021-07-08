@@ -164,7 +164,7 @@ namespace Task5
 
         internal void DeletePerson(SqlConnection connection)
         {
-            int personId = textEntries.EnterIDOfPerson();
+            int personId = textEntries.EnterPersonID();
 
             connection.Open();
 
@@ -215,7 +215,7 @@ namespace Task5
             command.Connection = connection;
             command.Transaction = transaction;
 
-            int personId = textEntries.EnterIDOfPerson();
+            int personId = textEntries.EnterPersonID();
             Console.WriteLine("Select option:");
             Console.WriteLine("1 - Update name\n2 - Update surname\n3 - Update phone number \n4 - Update all person data");
             char select = Console.ReadKey().KeyChar;

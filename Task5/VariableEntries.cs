@@ -35,7 +35,15 @@ namespace Task5
             return "+370" + telephonNumber;
         }
 
-        internal int EnterIDOfPerson()
+        internal double EnterDebtAmount()
+        {
+            Console.Clear();
+            Console.WriteLine("Enter debt amount");
+            double debtAmount = Convert.ToDouble(Console.ReadLine());
+            return debtAmount;
+        }
+
+        internal int EnterPersonID()
         {
             Console.Clear();
             Console.WriteLine("Enter person id");

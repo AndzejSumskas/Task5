@@ -10,7 +10,7 @@ namespace Task5
 {
     class PersonDAL
     {
-        internal void ReadAllPersons(SqlCommand command, SqlTransaction transaction )
+        internal void PrintAllPersonsData(SqlCommand command, SqlTransaction transaction )
         {
             command.CommandText = "Select ID, NAME, SURNAME, PHONENUMBER from PERSONS";
 
@@ -24,17 +24,18 @@ namespace Task5
             transaction.Commit();          
         }
 
-        internal List<string> GetListOfPersonsFromDB(SqlCommand command, SqlTransaction transaction)
+        internal List<Person> GetListOfPersonsFromDB(SqlCommand command, SqlTransaction transaction)
         {
-            List<string> data = new List<string>();
+            List<Person> data = new List<Person>();
 
             command.CommandText = $"Select ID, NAME, SURNAME, PHONENUMBER from PERSONS";
 
             SqlDataReader dataReader = command.ExecuteReader();
-
+            int counter = 0;
             while (dataReader.Read())
             {
-                data.Add($"{dataReader.GetValue(0)} {dataReader.GetValue(1)} {dataReader.GetValue(2)} {dataReader.GetValue(3)}");
+                counter++;
+                data.Add(new Person(Convert.ToInt32( dataReader.GetValue(0)), dataReader.GetValue(1).ToString(), dataReader.GetValue(2).ToString(), dataReader.GetValue(3).ToString()));
             }
 
             dataReader.Close();
@@ -48,7 +49,7 @@ namespace Task5
                    $"INSERT INTO PERSONS(NAME,SURNAME,PHONENUMBER) VALUES('{person.Name}', '{person.SurName}', '{person.PhoneNumber}'); Select @@IDENTITY;";
 
             int ID = Convert.ToInt32(command.ExecuteScalar());
-            Console.WriteLine($"Person with {ID} was added to DB");
+            Console.WriteLine($"Person with ID {ID} was added to DB");
 
             transaction.Commit();
         }
@@ -68,9 +69,8 @@ namespace Task5
             {
                 Console.WriteLine("Person not found");
             }
-            Console.WriteLine("Press key to continue...");
-            Console.ReadKey();
-            transaction.Commit();
+            dataReader.Close();
+            transaction.Commit();         
         }
 
         internal void UpdatePersonalData(SqlConnection connection, SqlTransaction transaction, SqlCommand command, int id, char select, string name, string surname, string phoneNumber)
