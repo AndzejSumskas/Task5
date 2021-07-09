@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Task5
 {
-    class DebtDAL
+    class PaymentDAL
     {
-        internal void PrintAllDebts(SqlCommand command, SqlTransaction transaction)
+        internal void PrintAllPayments(SqlCommand command, SqlTransaction transaction)
         {
-            command.CommandText = "Select ID, PERSON_ID, R_DATE, DEBT_AMOUNT from DEBTS";
+            command.CommandText = "Select ID, PERSON_ID, R_DATE, PAYMENT_AMOUNT from PAYMENTS";
 
             SqlDataReader dataReader = command.ExecuteReader();
 
@@ -23,11 +23,11 @@ namespace Task5
             transaction.Commit();
         }
 
-        internal List<Debt> GetListOfDebtsFromDB(SqlCommand command, SqlTransaction transaction)
+        internal List<Debt> GetListOfPaymentsFromDB(SqlCommand command, SqlTransaction transaction)
         {
             List<Debt> data = new List<Debt>();
 
-            command.CommandText = $"Select ID, PERSON_ID, R_DATE, DEBT_AMOUNT from DEBTS";
+            command.CommandText = $"Select ID, PERSON_ID, R_DATE, PAYMENT_AMOUNT from PAYMENTS";
 
             SqlDataReader dataReader = command.ExecuteReader();
 
@@ -41,20 +41,20 @@ namespace Task5
             return data;
         }
 
-        internal void AddNewDebtToDataBase(SqlCommand command, SqlTransaction transaction, Debt debt)
+        internal void AddNewPayMentToDataBase(SqlCommand command, SqlTransaction transaction, Payment payment)
         {
             command.CommandText =
-                   $"INSERT INTO DEBTS(PERSON_ID, R_DATE, DEBT_AMOUNT) VALUES('{debt.PersonId}', '{debt.Date}', '{debt.DeptAmount}'); Select @@IDENTITY;";
+                   $"INSERT INTO DEBTS(PERSON_ID, R_DATE, DEBT_AMOUNT) VALUES('{payment.PersonId}', '{payment.Date}', '{payment.PaymentAmount}'); Select @@IDENTITY;";
 
             int ID = Convert.ToInt32(command.ExecuteScalar());
-            Console.WriteLine($"Debt with ID {ID} was added to DB");
+            Console.WriteLine($"Payment with ID {ID} was added to DB");
 
             transaction.Commit();
         }
 
-        internal void SearchDebtsInDataBase(SqlConnection connection, SqlTransaction transaction, SqlCommand command, int personID)
+        internal void SearchPaymentsInDataBase(SqlConnection connection, SqlTransaction transaction, SqlCommand command, int personID)
         {
-            command.CommandText = $"Select ID, PERSON_ID, R_DATE, DEBT_AMOUNT FROM DEBTS WHERE PERSON_ID  = '{personID}'";
+            command.CommandText = $"Select ID, PERSON_ID, R_DATE, PAYMENT_AMOUNT FROM PAYMENTS WHERE PERSON_ID  = '{personID}'";
             int searchCount = 0;
             SqlDataReader dataReader = command.ExecuteReader();
             Console.WriteLine("Search result:");
@@ -72,35 +72,35 @@ namespace Task5
             transaction.Commit();
         }
 
-        internal void UpdateDebtData(SqlConnection connection, SqlTransaction transaction, SqlCommand command, int id, char select, int personID, string date, double debtAmount)
+        internal void UpdatePaymentData(SqlConnection connection, SqlTransaction transaction, SqlCommand command, int id, char select, int personID, string date, double debtAmount)
         {
             switch (select)
             {
                 case '1':
-                    command.CommandText = $"UPDATE DEBTS SET PERSON_ID = '{personID}' WHERE ID = {id}";
+                    command.CommandText = $"UPDATE PAYMENTS SET PERSON_ID = '{personID}' WHERE ID = {id}";
                     break;
                 case '2':
-                    command.CommandText = $"UPDATE DEBTS SET SET R_DATE = '{date}' WHERE ID = {id}";
+                    command.CommandText = $"UPDATE PAYMENTS SET SET R_DATE = '{date}' WHERE ID = {id}";
                     break;
                 case '3':
-                    command.CommandText = $"UPDATE DEBTS SET DEBT_AMOUNT = '{debtAmount}' WHERE ID = {id}";
+                    command.CommandText = $"UPDATE PAYMENTS SET PAYMENT_AMOUNT = '{debtAmount}' WHERE ID = {id}";
                     break;
                 case '4':
-                    command.CommandText = $"UPDATE DEBTS SET PERSON_ID = '{personID}', R_DATE = '{date}', DEBT_AMOUNT = '{debtAmount}' WHERE ID = {id}";
+                    command.CommandText = $"UPDATE PAYMENTS SET PERSON_ID = '{personID}', R_DATE = '{date}', PAYMENT_AMOUNT = '{debtAmount}' WHERE ID = {id}";
                     break;
             }
-            Console.WriteLine("Debt data was updated.");
+            Console.WriteLine("Payment data was updated.");
             command.ExecuteNonQuery();
             transaction.Commit();
         }
 
         internal void DeletePerson(SqlConnection connection, SqlTransaction transaction, SqlCommand command, int id)
         {
-            command.CommandText = $"DELETE FROM DEPTS WHERE ID = {id}";
+            command.CommandText = $"DELETE FROM PAYMENTS WHERE ID = {id}";
             command.ExecuteNonQuery();
 
             transaction.Commit();
-            Console.WriteLine("Debt was deleted");
+            Console.WriteLine("Payment was deleted");
         }
     }
 }

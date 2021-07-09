@@ -76,10 +76,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppController.cs" />
-    <Compile Include="DataAccessLayer.cs" />
     <Compile Include="DebtDAL.cs" />
     <Compile Include="Debt.cs" />
-    <Compile Include="MainMenuSelect.cs" />
+    <Compile Include="Payment.cs" />
+    <Compile Include="PaymentDAL.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="PersonDAL.cs" />
     <Compile Include="Program.cs" />

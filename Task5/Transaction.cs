@@ -190,15 +190,21 @@ namespace Task5
 
                             while (dataReader.Read())
                             {
-                                Console.WriteLine($"{dataReader.GetValue(0)} {dataReader.GetValue(1)} {dataReader.GetValue(2)}");
+                                Console.WriteLine($"{dataReader.GetValue(0)} {dataReader.GetValue(1)} {dataReader.GetValue(2)} {dataReader.GetValue(3)}");
                             }
                             dataReader.Close();
                             transaction.Commit();
                             break;
                         case 'o':
+
+                            Test(command, transaction);
+
                             
                             break;
                         case 'p':
+
+                            break;
+                        case 'q':
 
                             break;
                         default:
@@ -231,6 +237,42 @@ namespace Task5
                     Console.WriteLine("Press key to continue...");
                     Console.ReadKey();
                 }
+            }
+        }
+        public void Test(SqlCommand command, SqlTransaction transaction)
+        {
+            List<Person> persons = new List<Person>();
+
+            command.CommandText = "GET_TABLE_DEBT_PAY_PROCEDURE";
+
+            SqlDataReader dataReader = command.ExecuteReader();
+
+            while (dataReader.Read())
+            {
+                Person person = new Person();
+                person.Id = Convert.ToInt32(dataReader.GetValue(0));
+                person.Name = dataReader.GetValue(1).ToString();
+                person.SurName = dataReader.GetValue(2).ToString();
+                person.DebtSumAmount = Convert.ToDouble(dataReader.GetValue(3));
+                person.PaymentSumAmount = Convert.ToDouble(dataReader.GetValue(4));
+                person.Balance = person.DebtSumAmount - person.PaymentSumAmount;
+
+                if (person.DebtSumAmount == null)
+                {
+                    person.DebtSumAmount = 0;
+                }
+                if (person.PaymentSumAmount == null)
+                {
+                    person.PaymentSumAmount = 0;
+                }
+                persons.Add(person); 
+            }
+            dataReader.Close();
+            transaction.Commit();
+
+            foreach(Person person in persons)
+            {
+                Console.WriteLine($"[{person.Id}] [{person.Name}] [{person.SurName}] [{person.DebtSumAmount}] [{person.PaymentSumAmount}] [{person.Balance}]");
             }
         }
     }
