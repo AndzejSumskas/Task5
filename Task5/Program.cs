@@ -21,34 +21,32 @@ namespace Task5
         static void Main(string[] args)
          {
 
-            string path = ConfigurationManager.AppSettings.Get("PerPath");
+            string ConnectingString = ConfigurationManager.AppSettings.Get("PerPath");
             
             AppController appController = new AppController();
 
-            //appController.ExecuteSqlTransaction(path);
-
-            appController.StartApplication(path);
+            appController.StartApplication(ConnectingString);
 
 
 
+            //Person person = new Person("Lukas", "Lekavicius", "+37064512547");
+
+            //using(SqlConnection connection = new SqlConnection(ConnectingString))
+            //{
+            //    SqlCommand cmd = new SqlCommand("INSERT INTO PERSONS(NAME,SURNAME,PHONENUMBER) Values(@0,@1,@2)", connection);
+
+            //    cmd.Parameters.AddWithValue("@0", person.Name);
+            //    cmd.Parameters.AddWithValue("@1", person.SurName);
+            //    cmd.Parameters.AddWithValue("@2", person.PhoneNumber);
+
+            //    connection.Open();
+
+            //    cmd.ExecuteNonQuery();
+
+            //    connection.Close();
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            //}
 
 
 
@@ -68,11 +66,36 @@ namespace Task5
 
 
 
-                        //Person person = new Person();
-                        //DataAccessLayer dataAccessLayer = new DataAccessLayer();
-                        //string path = ConfigurationManager.AppSettings.Get("PerPath");
-                        //SqlConnection con = new SqlConnection($@"{path}");         
-                        //char select = ' ';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            //Person person = new Person();
+            //DataAccessLayer dataAccessLayer = new DataAccessLayer();
+            //string path = ConfigurationManager.AppSettings.Get("PerPath");
+            //SqlConnection con = new SqlConnection($@"{path}");         
+            //char select = ' ';
 
             //while (select != '9')
             //{

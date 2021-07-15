@@ -15,8 +15,6 @@ namespace Task5
         private DebtDAL debtDAL = new DebtDAL();
         private Person person = new Person();
         private Debt debt = new Debt();
-        private List<Person> persons = new List<Person>();
-        private List<Debt> debts = new List<Debt>();
         private VariableEntries variableEntries = new VariableEntries();
         
         public void ExecuteSqlTransaction(string connectionString, char select)
@@ -40,10 +38,10 @@ namespace Task5
                     switch (select)
                     {
                         case 'a':
-                            personDAL.PrintAllPersonsData(command, transaction);
+                            personDAL.WriteToConsole(command, transaction);
                             break;
                         case 'b':
-                            var persons = personDAL.GetListOfPersonsFromDB(command, transaction);
+                            var persons = personDAL.GetList(command, transaction);
                             List<string> personsData = new List<string>();
 
                             foreach (var person in persons)
@@ -56,12 +54,12 @@ namespace Task5
                             break;
                         case 'c':
                             Person newPerson = person.CreateNewPerson();
-                            personDAL.AddNewPersonToDataBase(command, transaction, newPerson);
+                            personDAL.Add(command, transaction, newPerson);
                             break;
                         case 'd':
                             Console.WriteLine("Make a search:");
                             string search = Console.ReadLine();
-                            personDAL.SearchPersonInDataBase(connection, transaction, command, search);
+                            personDAL.GetSearchList(connection, transaction, command, search);
                             break;
                         case 'e':
                             bool updateIsActive = false;
@@ -101,24 +99,24 @@ namespace Task5
 
                             if (selectOption == '1' || selectOption == '2' || selectOption == '3' || selectOption == '4')
                             {
-                                personDAL.UpdatePersonalData(connection, transaction, command, personId, selectOption, name, surName, phoneNumber);
+                                personDAL.Update(connection, transaction, command, personId, selectOption, name, surName, phoneNumber);
                             }
                             Console.WriteLine("Person was updated");
                             break;
                         case 'f':
                             int idOfPersonToDelete = variableEntries.EnterPersonID();
-                            personDAL.DeletePerson(connection, transaction, command, idOfPersonToDelete);
+                            personDAL.Delete(connection, transaction, command, idOfPersonToDelete);
                             break;
                         case 'g':
-                            debtDAL.PrintAllDebts(command,transaction);
+                            debtDAL.WriteToConsole(command,transaction);
                             break;
                         case 'h':
-                            var debts = debtDAL.GetListOfDebtsFromDB(command, transaction);
+                            var debts = debtDAL.GetList(command, transaction);
                             List<string> debtsData = new List<string>();
 
                             foreach (var debt in debts)
                             {
-                                debtsData.Add($"{debt.Id} {debt.PersonId} {debt.Date} {debt.DeptAmount}");
+                                debtsData.Add($"{debt.Id} {debt.PersonId} {debt.Date} {debt.Amount}");
                             }
                             string jsonDebt = JsonConvert.SerializeObject(debtsData.ToArray(), Formatting.Indented);
                             File.WriteAllText(@"C:\Users\Andzej\Desktop\IT Tasks\HomeWork\Task5\Task5\Debts.json", jsonDebt);
@@ -126,12 +124,12 @@ namespace Task5
                             break;
                         case 'i':
                             Debt newDebt = debt.CreateNeDebt();
-                            debtDAL.AddNewDebtToDataBase(command, transaction, newDebt);
+                            debtDAL.Add(command, transaction, newDebt);
                             break;
                         case 'j':
                             Console.WriteLine("Make a search by person id:");
                             int idSearch = Convert.ToInt32(Console.ReadLine());
-                            debtDAL.SearchDebtsInDataBase(connection, transaction, command, idSearch);
+                            debtDAL.GetSearchList(connection, transaction, command, idSearch);
                             break;
                         case 'l':
                             bool debtUpdateIsActive = false;
@@ -173,14 +171,14 @@ namespace Task5
 
                             if (selectOpt == '1' || selectOpt == '2' || selectOpt == '3' || selectOpt == '4')
                             {
-                                debtDAL.UpdateDebtData(connection, transaction, command, IdOfPerson, selectOpt, person_id, date.ToString(), debtAmount);
+                                debtDAL.Update(connection, transaction, command, IdOfPerson, selectOpt, person_id, date.ToString(), debtAmount);
 
                             }
                             Console.WriteLine("Person was updated");
                             break;
                         case 'm':
                             int idOfDebtToDelete = variableEntries.EnterPersonID();
-                            personDAL.DeletePerson(connection, transaction, command, idOfDebtToDelete);
+                            personDAL.Delete(connection, transaction, command, idOfDebtToDelete);
                             break;
                         case 'n':
                             //Print Name, Surname, debtAountSum
@@ -196,10 +194,8 @@ namespace Task5
                             transaction.Commit();
                             break;
                         case 'o':
-
-                            Test(command, transaction);
-
-                            
+                             PrintPersonTableWithDebtPaymentBalanceAmount(command, transaction);
+                                                        
                             break;
                         case 'p':
 
@@ -239,7 +235,7 @@ namespace Task5
                 }
             }
         }
-        public void Test(SqlCommand command, SqlTransaction transaction)
+        public void PrintPersonTableWithDebtPaymentBalanceAmount(SqlCommand command, SqlTransaction transaction)
         {
             List<Person> persons = new List<Person>();
 
@@ -256,15 +252,6 @@ namespace Task5
                 person.DebtSumAmount = Convert.ToDouble(dataReader.GetValue(3));
                 person.PaymentSumAmount = Convert.ToDouble(dataReader.GetValue(4));
                 person.Balance = person.DebtSumAmount - person.PaymentSumAmount;
-
-                if (person.DebtSumAmount == null)
-                {
-                    person.DebtSumAmount = 0;
-                }
-                if (person.PaymentSumAmount == null)
-                {
-                    person.PaymentSumAmount = 0;
-                }
                 persons.Add(person); 
             }
             dataReader.Close();

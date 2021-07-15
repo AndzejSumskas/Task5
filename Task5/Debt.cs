@@ -11,7 +11,7 @@ namespace Task5
         internal int Id { get; set; }
         internal DateTime Date { get; set; }
         internal int PersonId { get; set; }
-        internal double DeptAmount { get; set; }
+        internal double Amount { get; set; }
 
         private VariableEntries variableEntries = new VariableEntries();
 
@@ -23,7 +23,7 @@ namespace Task5
         {
             PersonId = personId;
             Date = date;
-            DeptAmount = deptAmount;
+            Amount = deptAmount;
         }
 
         public Debt(int id, int personId, DateTime date, double deptAmount)
@@ -31,7 +31,7 @@ namespace Task5
             Id = id;
             PersonId = personId;
             Date = date;
-            DeptAmount = deptAmount;
+            Amount = deptAmount;
         }
 
         internal Debt CreateNeDebt()

@@ -25,6 +25,13 @@ namespace Task5
         {
         }
 
+        public Person(string name, string surName, string phoneNumber)
+        {
+            Name = name;
+            SurName = surName;
+            PhoneNumber = phoneNumber;
+        }
+
         public Person(int id, string name, string surName, string phoneNumber)
         {
             Id = id;

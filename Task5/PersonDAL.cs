@@ -10,7 +10,7 @@ namespace Task5
 {
     class PersonDAL
     {
-        internal void PrintAllPersonsData(SqlCommand command, SqlTransaction transaction )
+        internal void WriteToConsole(SqlCommand command, SqlTransaction transaction )
         {
             command.CommandText = "Select ID, NAME, SURNAME, PHONENUMBER from PERSONS";
 
@@ -24,17 +24,16 @@ namespace Task5
             transaction.Commit();          
         }
 
-        internal List<Person> GetListOfPersonsFromDB(SqlCommand command, SqlTransaction transaction)
+        internal List<Person> GetList(SqlCommand command, SqlTransaction transaction)
         {
             List<Person> data = new List<Person>();
 
             command.CommandText = $"Select ID, NAME, SURNAME, PHONENUMBER from PERSONS";
 
             SqlDataReader dataReader = command.ExecuteReader();
-            int counter = 0;
+
             while (dataReader.Read())
             {
-                counter++;
                 data.Add(new Person(Convert.ToInt32( dataReader.GetValue(0)), dataReader.GetValue(1).ToString(), dataReader.GetValue(2).ToString(), dataReader.GetValue(3).ToString()));
             }
 
@@ -43,37 +42,32 @@ namespace Task5
             return data;           
         }
 
-        internal void AddNewPersonToDataBase(SqlCommand command, SqlTransaction transaction, Person person)
+        internal int Add(SqlCommand command, SqlTransaction transaction, Person person)
         {
-            command.CommandText =
-                   $"INSERT INTO PERSONS(NAME,SURNAME,PHONENUMBER) VALUES('{person.Name}', '{person.SurName}', '{person.PhoneNumber}'); Select @@IDENTITY;";
-
-            int ID = Convert.ToInt32(command.ExecuteScalar());
-            Console.WriteLine($"Person with ID {ID} was added to DB");
-
+            command.CommandText = "INSERT INTO PERSONS(NAME,SURNAME,PHONENUMBER) Values(@0,@1,@2); Select SCOPE_IDENTITY()";
+            command.Parameters.AddWithValue("@0", person.Name);
+            command.Parameters.AddWithValue("@1", person.SurName);
+            command.Parameters.AddWithValue("@2", person.PhoneNumber);
+            int id = Convert.ToInt32(command.ExecuteScalar());
             transaction.Commit();
+            return id;
         }
 
-        internal void SearchPersonInDataBase(SqlConnection connection, SqlTransaction transaction, SqlCommand command, string search)
+        internal List<Person> GetSearchList(SqlConnection connection, SqlTransaction transaction, SqlCommand command, string search)
         {
-            command.CommandText = $"EXEC SearchPersons @Search = '{search}'";
-            int searchCount = 0;
+            List<Person> data = new List<Person>();
+
             SqlDataReader dataReader = command.ExecuteReader();
-            Console.WriteLine("Search result:");
             while (dataReader.Read())
             {
-                Console.WriteLine($"{dataReader.GetValue(0)} {dataReader.GetValue(1)} {dataReader.GetValue(2)} {dataReader.GetValue(3)}");
-                searchCount++;
-            }
-            if (searchCount == 0)
-            {
-                Console.WriteLine("Person not found");
+                data.Add(new Person(Convert.ToInt32(dataReader.GetValue(0)), dataReader.GetValue(1).ToString(), dataReader.GetValue(2).ToString(), dataReader.GetValue(3).ToString()));
             }
             dataReader.Close();
-            transaction.Commit();         
+            transaction.Commit();
+            return data;
         }
 
-        internal void UpdatePersonalData(SqlConnection connection, SqlTransaction transaction, SqlCommand command, int id, char select, string name, string surname, string phoneNumber)
+        internal void Update(SqlConnection connection, SqlTransaction transaction, SqlCommand command, int id, char select, string name, string surname, string phoneNumber)
         {
             switch (select)
             {
@@ -90,18 +84,16 @@ namespace Task5
                     command.CommandText = $"UPDATE PERSONS SET NAME = '{name}',SURNAME = '{surname}', PHONENUMBER = '{phoneNumber}' WHERE ID = {id}";
                     break;
             }
-            Console.WriteLine("Person data was updated.");
             command.ExecuteNonQuery();
             transaction.Commit();
         }
 
-        internal void DeletePerson(SqlConnection connection, SqlTransaction transaction, SqlCommand command, int id)
+        internal void Delete(SqlConnection connection, SqlTransaction transaction, SqlCommand command, int id)
         {
             command.CommandText = $"DELETE FROM PERSONS WHERE ID = {id}";
             command.ExecuteNonQuery();
 
             transaction.Commit();
-            Console.WriteLine("Person was deleted");
         }
     }
 }
