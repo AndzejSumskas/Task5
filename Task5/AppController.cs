@@ -22,18 +22,21 @@ namespace Task5
             {
                 Console.Clear();
                 Console.WriteLine("Select option:");
-                Console.WriteLine("a - Print all persons ");
+                Console.WriteLine("a - Write all persons from db to console");
                 Console.WriteLine("b - Write all personts to Json file");
-                Console.WriteLine("c - Add new person to DB");
-                Console.WriteLine("d - Search person in DB");
-                Console.WriteLine("e - Update person in DB");
-                Console.WriteLine("f - Delete person from DB");
-                Console.WriteLine("g - Print all debts ");
+                Console.WriteLine("c - Add new person to db");
+                Console.WriteLine("d - Search person in db");
+                Console.WriteLine("e - Update person in db");
+                Console.WriteLine("f - Delete person from db");
+                Console.WriteLine("g - Write all debs from db to console ");
                 Console.WriteLine("h - Write all debts to Json file");
                 Console.WriteLine("i - Add new debt to DB");
-                Console.WriteLine("j - Search debts in DB");
+                Console.WriteLine("j - Search debt in DB");
                 Console.WriteLine("l - Update debt in DB");
                 Console.WriteLine("m - Delete debt from DB");
+                Console.WriteLine("n - Write Name, Surname, debtAmountSum to console");
+
+                
 
                 Console.WriteLine("q - Exit");
 

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.OleDb;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -10,7 +9,7 @@ namespace Task5
 {
     class PersonDAL
     {
-        internal void WriteToConsole(SqlCommand command, SqlTransaction transaction )
+        internal void WriteToConsole(SqlCommand command, SqlTransaction transaction)
         {
             command.CommandText = "Select ID, NAME, SURNAME, PHONENUMBER from PERSONS";
 
@@ -21,7 +20,7 @@ namespace Task5
                 Console.WriteLine($"{dataReader.GetValue(0)} {dataReader.GetValue(1)} {dataReader.GetValue(2)} {dataReader.GetValue(3)}");
             }
             dataReader.Close();
-            transaction.Commit();          
+            transaction.Commit();
         }
 
         internal List<Person> GetList(SqlCommand command, SqlTransaction transaction)
@@ -34,12 +33,12 @@ namespace Task5
 
             while (dataReader.Read())
             {
-                data.Add(new Person(Convert.ToInt32( dataReader.GetValue(0)), dataReader.GetValue(1).ToString(), dataReader.GetValue(2).ToString(), dataReader.GetValue(3).ToString()));
+                data.Add(new Person(Convert.ToInt32(dataReader.GetValue(0)), dataReader.GetValue(1).ToString(), dataReader.GetValue(2).ToString(), dataReader.GetValue(3).ToString()));
             }
 
             dataReader.Close();
             transaction.Commit();
-            return data;           
+            return data;
         }
 
         internal int Add(SqlCommand command, SqlTransaction transaction, Person person)
@@ -53,10 +52,15 @@ namespace Task5
             return id;
         }
 
-        internal List<Person> GetSearchList(SqlConnection connection, SqlTransaction transaction, SqlCommand command, string search)
+        internal List<Person> GetSearchList(SqlTransaction transaction, SqlCommand command, string search)
         {
             List<Person> data = new List<Person>();
 
+            command.CommandText = $"SELECT ID,NAME,SURNAME,PHONENUMBER FROM PERSONS WHERE ID=@3 OR NAME=@0 OR SURNAME=@1 or PHONENUMBER=@2";
+            command.Parameters.AddWithValue("@0", search);
+            command.Parameters.AddWithValue("@1", search);
+            command.Parameters.AddWithValue("@2", search);
+            command.Parameters.AddWithValue("@3", search);
             SqlDataReader dataReader = command.ExecuteReader();
             while (dataReader.Read())
             {
@@ -67,30 +71,42 @@ namespace Task5
             return data;
         }
 
-        internal void Update(SqlConnection connection, SqlTransaction transaction, SqlCommand command, int id, char select, string name, string surname, string phoneNumber)
+        internal void Update(SqlTransaction transaction, SqlCommand command, int id, char select, string name, string surname, string phoneNumber)
         {
             switch (select)
             {
                 case '1':
-                    command.CommandText = $"UPDATE PERSONS SET NAME = '{name}' WHERE ID = {id}";
+                    command.CommandText = $"UPDATE PERSONS SET NAME = @0 WHERE ID = @1";
+                    command.Parameters.AddWithValue("@0", name);
+                    command.Parameters.AddWithValue("@1", id);
                     break;
                 case '2':
-                    command.CommandText = $"UPDATE PERSONS SET SURNAME = '{surname}' WHERE ID = {id}";
+                    command.CommandText = $"UPDATE PERSONS SET SURNAME = @0 WHERE ID = @1";
+                    command.Parameters.AddWithValue("@0", surname);
+                    command.Parameters.AddWithValue("@1", id);
                     break;
                 case '3':
-                    command.CommandText = $"UPDATE PERSONS SET PHONENUMBER = '{phoneNumber}' WHERE ID = {id}";
+                    command.CommandText = $"UPDATE PERSONS SET PHONENUMBER = @0 WHERE ID = @1";
+                    command.Parameters.AddWithValue("@0", phoneNumber);
+                    command.Parameters.AddWithValue("@1", id);
                     break;
                 case '4':
-                    command.CommandText = $"UPDATE PERSONS SET NAME = '{name}',SURNAME = '{surname}', PHONENUMBER = '{phoneNumber}' WHERE ID = {id}";
+                    command.CommandText = $"UPDATE PERSONS SET NAME = @0,SURNAME = @1, PHONENUMBER = @2 WHERE ID = @3";
+                    command.Parameters.AddWithValue("@0", name);
+                    command.Parameters.AddWithValue("@1", surname);
+                    command.Parameters.AddWithValue("@2", phoneNumber);
+                    command.Parameters.AddWithValue("@3", id);
+
                     break;
             }
             command.ExecuteNonQuery();
             transaction.Commit();
         }
 
-        internal void Delete(SqlConnection connection, SqlTransaction transaction, SqlCommand command, int id)
+        internal void Delete(SqlTransaction transaction, SqlCommand command, int id)
         {
-            command.CommandText = $"DELETE FROM PERSONS WHERE ID = {id}";
+            command.CommandText = $"DELETE FROM PERSONS WHERE ID = @0";
+            command.Parameters.AddWithValue("@0", id);
             command.ExecuteNonQuery();
 
             transaction.Commit();

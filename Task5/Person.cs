@@ -8,18 +8,18 @@ namespace Task5
 {
     class Person
     {
-        internal int Id { get; set; }
-        internal string Name { get; set; }
-        internal string SurName { get; set; }
-        internal string PhoneNumber { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string SurName { get; set; }
+        public string PhoneNumber { get; set; }
 
-        internal double DebtSumAmount { get; set; }
-        internal double PaymentSumAmount { get; set; }
-        internal double Balance { get; set; }
+        public double DebtSumAmount { get; set; }
+        public double PaymentSumAmount { get; set; }
+        public double Balance { get; set; }
 
         VariableEntries textEntries = new VariableEntries();
 
-        internal List<string> persons = new List<string>();
+        public List<string> persons = new List<string>();
 
         public Person()
         {

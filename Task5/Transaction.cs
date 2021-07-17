@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+
+
 
 namespace Task5
 {
@@ -16,7 +16,8 @@ namespace Task5
         private Person person = new Person();
         private Debt debt = new Debt();
         private VariableEntries variableEntries = new VariableEntries();
-        
+        EventLogClass eventLogClass = new EventLogClass();
+
         public void ExecuteSqlTransaction(string connectionString, char select)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -39,6 +40,10 @@ namespace Task5
                     {
                         case 'a':
                             personDAL.WriteToConsole(command, transaction);
+
+                            //Event log
+                            eventLogClass.LogInfo("All persons from db wasr writed to console.");
+
                             break;
                         case 'b':
                             var persons = personDAL.GetList(command, transaction);
@@ -59,7 +64,7 @@ namespace Task5
                         case 'd':
                             Console.WriteLine("Make a search:");
                             string search = Console.ReadLine();
-                            personDAL.GetSearchList(connection, transaction, command, search);
+                            personDAL.GetSearchList(transaction, command, search);
                             break;
                         case 'e':
                             bool updateIsActive = false;
@@ -99,13 +104,13 @@ namespace Task5
 
                             if (selectOption == '1' || selectOption == '2' || selectOption == '3' || selectOption == '4')
                             {
-                                personDAL.Update(connection, transaction, command, personId, selectOption, name, surName, phoneNumber);
+                                personDAL.Update(transaction, command, personId, selectOption, name, surName, phoneNumber);
                             }
                             Console.WriteLine("Person was updated");
                             break;
                         case 'f':
                             int idOfPersonToDelete = variableEntries.EnterPersonID();
-                            personDAL.Delete(connection, transaction, command, idOfPersonToDelete);
+                            personDAL.Delete(transaction, command, idOfPersonToDelete);
                             break;
                         case 'g':
                             debtDAL.WriteToConsole(command,transaction);
@@ -129,7 +134,7 @@ namespace Task5
                         case 'j':
                             Console.WriteLine("Make a search by person id:");
                             int idSearch = Convert.ToInt32(Console.ReadLine());
-                            debtDAL.GetSearchList(connection, transaction, command, idSearch);
+                            debtDAL.GetSearchList(transaction, command, idSearch);
                             break;
                         case 'l':
                             bool debtUpdateIsActive = false;
@@ -171,14 +176,14 @@ namespace Task5
 
                             if (selectOpt == '1' || selectOpt == '2' || selectOpt == '3' || selectOpt == '4')
                             {
-                                debtDAL.Update(connection, transaction, command, IdOfPerson, selectOpt, person_id, date.ToString(), debtAmount);
+                                debtDAL.Update(transaction, command, IdOfPerson, selectOpt, person_id, date.ToString(), debtAmount);
 
                             }
                             Console.WriteLine("Person was updated");
                             break;
                         case 'm':
                             int idOfDebtToDelete = variableEntries.EnterPersonID();
-                            personDAL.Delete(connection, transaction, command, idOfDebtToDelete);
+                            personDAL.Delete(transaction, command, idOfDebtToDelete);
                             break;
                         case 'n':
                             //Print Name, Surname, debtAountSum
@@ -198,7 +203,16 @@ namespace Task5
                                                         
                             break;
                         case 'p':
+                            command.CommandText = "SELECT p.ID, p.NAME, p.SURNAME, d.DEBT_SUM, pay.PAYMENT_SUM, (d.DEBT_SUM-pay.PAYMENT_SUM) as BALANCE FROM PERSONS p left JOIN(SELECT PERSON_ID, SUM(DEBT_AMOUNT) AS DEBT_SUM FROM DEBTS group by PERSON_ID) d ON p.ID = d.PERSON_ID left JOIN(SELECT PERSON_ID, SUM(PAYMENT_AMOUNT) AS PAYMENT_SUM FROM PAYMENTS group by PERSON_ID) pay ON p.ID = pay.PERSON_ID WHERE d.DEBT_SUM is not null or pay.PAYMENT_SUM is not null";
 
+                            SqlDataReader dataReader1 = command.ExecuteReader();
+
+                            while (dataReader1.Read())
+                            {
+                                Console.WriteLine($"{dataReader1.GetValue(0)} {dataReader1.GetValue(1)} {dataReader1.GetValue(2)} {dataReader1.GetValue(3)} {dataReader1.GetValue(4)} {dataReader1.GetValue(5)}");
+                            }
+                            dataReader1.Close();
+                            transaction.Commit();
                             break;
                         case 'q':
 
@@ -230,6 +244,11 @@ namespace Task5
                         Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
                         Console.WriteLine("  Message: {0}", ex2.Message);
                     }
+                    connection.Close();
+
+                    eventLogClass.LogError(ex.Message);
+
+
                     Console.WriteLine("Press key to continue...");
                     Console.ReadKey();
                 }

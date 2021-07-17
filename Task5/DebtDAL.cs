@@ -43,7 +43,11 @@ namespace Task5
 
         internal int Add(SqlCommand command, SqlTransaction transaction, Debt debt)
         {
-            command.CommandText = $"INSERT INTO DEBTS(PERSON_ID, R_DATE, DEBT_AMOUNT) VALUES('{debt.PersonId}', '{debt.Date}', '{debt.Amount}'); Select @@IDENTITY;";
+            command.CommandText = $"INSERT INTO DEBTS(PERSON_ID, R_DATE, DEBT_AMOUNT) VALUES(@0,@1,@2); Select SCOPE_IDENTITY();";
+            command.Parameters.AddWithValue("@0", debt.PersonId);
+            command.Parameters.AddWithValue("@1", debt.Date);
+            command.Parameters.AddWithValue("@2", debt.Amount);
+
 
             int id = Convert.ToInt32(command.ExecuteScalar());
 
@@ -51,11 +55,12 @@ namespace Task5
             return id;
         }
 
-        internal List<Debt> GetSearchList(SqlConnection connection, SqlTransaction transaction, SqlCommand command, int personID)
+        internal List<Debt> GetSearchList(SqlTransaction transaction, SqlCommand command, int personID)
         {
             List<Debt> data = new List<Debt>();
 
-            command.CommandText = $"Select ID, PERSON_ID, R_DATE, DEBT_AMOUNT FROM DEBTS WHERE PERSON_ID  = '{personID}'";
+            command.CommandText = $"Select ID, PERSON_ID, R_DATE, DEBT_AMOUNT FROM DEBTS WHERE PERSON_ID  = @0";
+            command.Parameters.AddWithValue("@0", personID);
             SqlDataReader dataReader = command.ExecuteReader();
 
             while (dataReader.Read())
@@ -67,30 +72,41 @@ namespace Task5
             return data;
         }
 
-        internal void Update(SqlConnection connection, SqlTransaction transaction, SqlCommand command, int id, char select, int personID, string date, double debtAmount)
+        internal void Update(SqlTransaction transaction, SqlCommand command, int id, char select, int personID, string date, double debtAmount)
         {
             switch (select)
             {
                 case '1':
-                    command.CommandText = $"UPDATE DEBTS SET PERSON_ID = '{personID}' WHERE ID = {id}";
+                    command.CommandText = $"UPDATE DEBTS SET PERSON_ID = @0 WHERE ID = @1";
+                    command.Parameters.AddWithValue("@0", personID);
+                    command.Parameters.AddWithValue("@1", id);
                     break;
                 case '2':
-                    command.CommandText = $"UPDATE DEBTS SET SET R_DATE = '{date}' WHERE ID = {id}";
+                    command.CommandText = $"UPDATE DEBTS SET SET R_DATE = @0 WHERE ID = @1";
+                    command.Parameters.AddWithValue("@0", date);
+                    command.Parameters.AddWithValue("@1", id);
                     break;
                 case '3':
-                    command.CommandText = $"UPDATE DEBTS SET DEBT_AMOUNT = '{debtAmount}' WHERE ID = {id}";
+                    command.CommandText = $"UPDATE DEBTS SET DEBT_AMOUNT = @0 WHERE ID = @1";
+                    command.Parameters.AddWithValue("@0", debtAmount);
+                    command.Parameters.AddWithValue("@1", id);
                     break;
                 case '4':
-                    command.CommandText = $"UPDATE DEBTS SET PERSON_ID = '{personID}', R_DATE = '{date}', DEBT_AMOUNT = '{debtAmount}' WHERE ID = {id}";
+                    command.CommandText = $"UPDATE DEBTS SET PERSON_ID = @0, R_DATE = @1, DEBT_AMOUNT = @2 WHERE ID = @3";
+                    command.Parameters.AddWithValue("@0", personID);
+                    command.Parameters.AddWithValue("@1", date);
+                    command.Parameters.AddWithValue("@2", debtAmount);
+                    command.Parameters.AddWithValue("@3", id);
                     break;
             }
             command.ExecuteNonQuery();
             transaction.Commit();
         }
 
-        internal void Delete(SqlConnection connection, SqlTransaction transaction, SqlCommand command, int id)
+        internal void Delete(SqlTransaction transaction, SqlCommand command, int id)
         {
-            command.CommandText = $"DELETE FROM DEBTS WHERE ID = {id}";
+            command.CommandText = $"DELETE FROM DEBTS WHERE ID = @0";
+            command.Parameters.AddWithValue("@0", id);
             command.ExecuteNonQuery();
 
             transaction.Commit();
