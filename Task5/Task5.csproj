@@ -81,11 +81,10 @@
     <Compile Include="AppController.cs" />
     <Compile Include="DebtDAL.cs" />
     <Compile Include="Debt.cs" />
+    <Compile Include="DecimalFormat.cs" />
     <Compile Include="EventLogClass.cs" />
     <Compile Include="Payment.cs" />
     <Compile Include="PaymentDAL.cs" />
-    <Compile Include="Person.cs" />
-    <Compile Include="PersonDAL.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -104,7 +103,12 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\ClassLibrary\ClassLibrary.csproj">
+      <Project>{25d47191-1ad0-4c31-b407-5230650ad705}</Project>
+      <Name>ClassLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

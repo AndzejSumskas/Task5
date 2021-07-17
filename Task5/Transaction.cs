@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IO;
+using ClassLibrary;
 
 
 
@@ -58,7 +59,7 @@ namespace Task5
                             Console.WriteLine("All files was writen to json file.");
                             break;
                         case 'c':
-                            Person newPerson = person.CreateNewPerson();
+                            Person newPerson = CreateNewPerson();
                             personDAL.Add(command, transaction, newPerson);
                             break;
                         case 'd':
@@ -205,10 +206,12 @@ namespace Task5
                         case 'p':
                             command.CommandText = "SELECT p.ID, p.NAME, p.SURNAME, d.DEBT_SUM, pay.PAYMENT_SUM, (d.DEBT_SUM-pay.PAYMENT_SUM) as BALANCE FROM PERSONS p left JOIN(SELECT PERSON_ID, SUM(DEBT_AMOUNT) AS DEBT_SUM FROM DEBTS group by PERSON_ID) d ON p.ID = d.PERSON_ID left JOIN(SELECT PERSON_ID, SUM(PAYMENT_AMOUNT) AS PAYMENT_SUM FROM PAYMENTS group by PERSON_ID) pay ON p.ID = pay.PERSON_ID WHERE d.DEBT_SUM is not null or pay.PAYMENT_SUM is not null";
 
+
+
                             SqlDataReader dataReader1 = command.ExecuteReader();
 
                             while (dataReader1.Read())
-                            {
+                            { 
                                 Console.WriteLine($"{dataReader1.GetValue(0)} {dataReader1.GetValue(1)} {dataReader1.GetValue(2)} {dataReader1.GetValue(3)} {dataReader1.GetValue(4)} {dataReader1.GetValue(5)}");
                             }
                             dataReader1.Close();
@@ -281,5 +284,18 @@ namespace Task5
                 Console.WriteLine($"[{person.Id}] [{person.Name}] [{person.SurName}] [{person.DebtSumAmount}] [{person.PaymentSumAmount}] [{person.Balance}]");
             }
         }
+
+        VariableEntries textEntries = new VariableEntries();
+        public Person CreateNewPerson()
+        {
+            Console.Clear();
+            Person person = new Person();
+            person.Name = textEntries.WriteNewName();
+            person.SurName = textEntries.WriteNewSurName();
+            person.PhoneNumber = textEntries.WriteNewPhoneNumber();
+
+            return person;
+        }
+
     }
 }

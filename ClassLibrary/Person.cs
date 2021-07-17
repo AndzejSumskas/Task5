@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Task5
+namespace ClassLibrary
 {
-    class Person
+    public class Person
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -16,8 +16,6 @@ namespace Task5
         public double DebtSumAmount { get; set; }
         public double PaymentSumAmount { get; set; }
         public double Balance { get; set; }
-
-        VariableEntries textEntries = new VariableEntries();
 
         public List<string> persons = new List<string>();
 
@@ -47,17 +45,6 @@ namespace Task5
             SurName = surName;
             DebtSumAmount = debtSumAmount;
             PaymentSumAmount = paymentSumAmount;
-        }
-
-        public Person CreateNewPerson()
-        {
-            Console.Clear();
-            Person person = new Person();
-            person.Name = textEntries.WriteNewName();
-            person.SurName = textEntries.WriteNewSurName();
-            person.PhoneNumber = textEntries.WriteNewPhoneNumber();
-
-            return person;
         }
     }
 }

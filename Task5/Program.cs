@@ -1,13 +1,5 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data.SqlClient;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Configuration;
+
 
 
 
@@ -23,7 +15,12 @@ namespace Task5
             AppController appController = new AppController();
 
             appController.StartApplication(ConnectingString);
-   
+
+
+            
+
+
+
         }        
     }
 

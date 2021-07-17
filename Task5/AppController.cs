@@ -35,8 +35,9 @@ namespace Task5
                 Console.WriteLine("l - Update debt in DB");
                 Console.WriteLine("m - Delete debt from DB");
                 Console.WriteLine("n - Write Name, Surname, debtAmountSum to console");
+                Console.WriteLine("p - Write Name, Surname, debtAmountSum, paymentAmountSum, balance to console");
 
-                
+
 
                 Console.WriteLine("q - Exit");
 
