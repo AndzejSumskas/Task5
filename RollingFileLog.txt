@@ -1,24 +1,5 @@
-20:28:52,564 [Task5.LogHelper] INFO - Persons was writed to console
-20:28:58,362 [Task5.LogHelper] INFO - All files was writen to json file.
-20:29:17,402 [Task5.LogHelper] INFO - Added person id = 121
-20:29:28,244 [Task5.LogHelper] ERROR - System.InvalidOperationException: There is already an open DataReader associated with this Command which must be closed first.
-   at System.Data.SqlClient.SqlInternalConnectionTds.ValidateConnectionForExecute(SqlCommand command)
-   at System.Data.SqlClient.SqlInternalTransaction.Rollback()
-   at System.Data.SqlClient.SqlTransaction.Rollback()
-   at Task5.Transaction.ExecuteSqlTransaction(String connectionString, Char select) in C:\Users\Andzej\Desktop\IT Tasks\HomeWork\Task5\Task5\Task5\Transaction.cs:line 266
-20:29:28,268 [Task5.LogHelper] ERROR - System.Data.SqlClient.SqlException (0x80131904): Conversion failed when converting the nvarchar value 'lina' to data type int.
-   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
-   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
-   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
-   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
-   at System.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
-   at System.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
-   at System.Data.SqlClient.SqlDataReader.Read()
-   at ClassLibrary.PersonDAL.GetSearchList(SqlTransaction transaction, SqlCommand command, String search) in C:\Users\Andzej\Desktop\IT Tasks\HomeWork\Task5\Task5\ClassLibrary\DAL\PersonDAL.cs:line 51
-   at Task5.Transaction.ExecuteSqlTransaction(String connectionString, Char select) in C:\Users\Andzej\Desktop\IT Tasks\HomeWork\Task5\Task5\Task5\Transaction.cs:line 70
-ClientConnectionId:665e2488-dfd8-4d7f-ba47-44a2b89e1fc3
-Error Number:245,State:1,Class:16
-20:29:41,072 [Task5.LogHelper] INFO - Search completed
-20:30:03,769 [Task5.LogHelper] INFO - Debts was writed to console.
-20:30:08,545 [Task5.LogHelper] INFO - SelectAllPersonsWithDebtSum
-20:30:26,319 [Task5.LogHelper] INFO - Select All Persons With DebtSum PaymnetSum Balance
+21:10:19,536 [Task5.LogHelper] INFO - Persons was writed to console
+21:10:19,662 [Task5.LogHelper] INFO - Persons was writed to console
+21:10:20,234 [Task5.LogHelper] INFO - Persons was writed to console
+21:10:20,544 [Task5.LogHelper] INFO - Persons was writed to console
+21:10:20,777 [Task5.LogHelper] INFO - Persons was writed to console
