@@ -50,7 +50,5 @@ namespace Task5
             int personId = Convert.ToInt32(Console.ReadLine());
             return personId;
         }
-
-
     }
 }

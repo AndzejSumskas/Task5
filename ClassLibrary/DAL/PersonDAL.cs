@@ -9,20 +9,6 @@ namespace ClassLibrary
 {
     public class PersonDAL
     {
-        public void WriteToConsole(SqlCommand command, SqlTransaction transaction)
-        {
-            command.CommandText = "Select ID, NAME, SURNAME, PHONENUMBER from PERSONS";
-
-            SqlDataReader dataReader = command.ExecuteReader();
-
-            while (dataReader.Read())
-            {
-                Console.WriteLine($"{dataReader.GetValue(0)} {dataReader.GetValue(1)} {dataReader.GetValue(2)} {dataReader.GetValue(3)}");
-            }
-            dataReader.Close();
-            transaction.Commit();
-        }
-
         public List<Person> GetList(SqlCommand command, SqlTransaction transaction)
         {
             List<Person> data = new List<Person>();

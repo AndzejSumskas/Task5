@@ -41,8 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAL\DebtDAL.cs" />
+    <Compile Include="DAL\PaymentDAL.cs" />
+    <Compile Include="Debt.cs" />
+    <Compile Include="Payment.cs" />
     <Compile Include="Person.cs" />
-    <Compile Include="PersonDAL.cs" />
+    <Compile Include="DAL\PersonDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -14,17 +14,15 @@ namespace Task5
     {
         private PersonDAL personDAL = new PersonDAL();
         private DebtDAL debtDAL = new DebtDAL();
-        private Person person = new Person();
-        private Debt debt = new Debt();
         private VariableEntries variableEntries = new VariableEntries();
-        EventLogClass eventLogClass = new EventLogClass();
+        LogHelper logHelper = new LogHelper();
 
         public void ExecuteSqlTransaction(string connectionString, char select)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-
+                
                 SqlCommand command = connection.CreateCommand();
                 SqlTransaction transaction;
 
@@ -40,11 +38,13 @@ namespace Task5
                     switch (select)
                     {
                         case 'a':
-                            personDAL.WriteToConsole(command, transaction);
+                            var persons1 = personDAL.GetList(command, transaction);
 
-                            //Event log
-                            eventLogClass.LogInfo("All persons from db wasr writed to console.");
-
+                            foreach (var person in persons1)
+                            {
+                                Console.WriteLine($"{person.Id} {person.Name} {person.SurName} {person.PhoneNumber} ");
+                            }
+                            logHelper.GetLog().Info("Persons was writed to console");
                             break;
                         case 'b':
                             var persons = personDAL.GetList(command, transaction);
@@ -56,16 +56,23 @@ namespace Task5
                             }
                             string json = JsonConvert.SerializeObject(personsData.ToArray(), Formatting.Indented);
                             File.WriteAllText(@"C:\Users\Andzej\Desktop\IT Tasks\HomeWork\Task5\Task5\Persons.json", json);
-                            Console.WriteLine("All files was writen to json file.");
+                            logHelper.GetLog().Info("All files was writen to json file.");
                             break;
                         case 'c':
                             Person newPerson = CreateNewPerson();
-                            personDAL.Add(command, transaction, newPerson);
+                            int addedId = personDAL.Add(command, transaction, newPerson);
+                            logHelper.GetLog().Info("Added person id = " + addedId);
+                            //Console.WriteLine("Added person id = " + addedId);
                             break;
                         case 'd':
                             Console.WriteLine("Make a search:");
                             string search = Console.ReadLine();
-                            personDAL.GetSearchList(transaction, command, search);
+                            var data = personDAL.GetSearchList(transaction, command, search);
+                            foreach (var person in data)
+                            {
+                                Console.WriteLine($"{person.Id} {person.Name} {person.SurName} {person.PhoneNumber}");
+                            }
+                            logHelper.GetLog().Info("Search completed");
                             break;
                         case 'e':
                             bool updateIsActive = false;
@@ -107,14 +114,21 @@ namespace Task5
                             {
                                 personDAL.Update(transaction, command, personId, selectOption, name, surName, phoneNumber);
                             }
-                            Console.WriteLine("Person was updated");
+                            logHelper.GetLog().Info("Person was updated");
+                            //Console.WriteLine("Person was updated");
                             break;
                         case 'f':
                             int idOfPersonToDelete = variableEntries.EnterPersonID();
                             personDAL.Delete(transaction, command, idOfPersonToDelete);
+                            logHelper.GetLog().Info("Person was deleted");
                             break;
                         case 'g':
-                            debtDAL.WriteToConsole(command,transaction);
+                            var debts1 = debtDAL.GetList(command, transaction);
+                            foreach (var debt in debts1)
+                            {
+                                Console.WriteLine($"{debt.Id} {debt.PersonId} {debt.Date} {debt.Amount}");
+                            }
+                            logHelper.GetLog().Info("Debts was writed to console.");
                             break;
                         case 'h':
                             var debts = debtDAL.GetList(command, transaction);
@@ -126,16 +140,24 @@ namespace Task5
                             }
                             string jsonDebt = JsonConvert.SerializeObject(debtsData.ToArray(), Formatting.Indented);
                             File.WriteAllText(@"C:\Users\Andzej\Desktop\IT Tasks\HomeWork\Task5\Task5\Debts.json", jsonDebt);
-                            Console.WriteLine("All files was writen to json file.");
+                            //Console.WriteLine("All files was writen to json file.");
+                            logHelper.GetLog().Info("All files was writen to json file.");
                             break;
                         case 'i':
-                            Debt newDebt = debt.CreateNeDebt();
-                            debtDAL.Add(command, transaction, newDebt);
+                            Debt newDebt = CreateNeDebt();
+                            int addedID = debtDAL.Add(command, transaction, newDebt);
+                            //Console.WriteLine($"Added debt with id {addedID}");
+                            logHelper.GetLog().Info($"Added debt with id {addedID}.");
                             break;
                         case 'j':
                             Console.WriteLine("Make a search by person id:");
                             int idSearch = Convert.ToInt32(Console.ReadLine());
-                            debtDAL.GetSearchList(transaction, command, idSearch);
+                            var searchData = debtDAL.GetSearchList(transaction, command, idSearch);
+                            foreach (var debt in searchData)
+                            {
+                                Console.WriteLine($"{debt.Id} {debt.PersonId} {debt.Date} {debt.Amount}");
+                            }
+                            logHelper.GetLog().Info("Search completed");
                             break;
                         case 'l':
                             bool debtUpdateIsActive = false;
@@ -180,11 +202,13 @@ namespace Task5
                                 debtDAL.Update(transaction, command, IdOfPerson, selectOpt, person_id, date.ToString(), debtAmount);
 
                             }
-                            Console.WriteLine("Person was updated");
+                            //Console.WriteLine("Debt was updated");
+                            logHelper.GetLog().Info("Debt was updated");
                             break;
                         case 'm':
                             int idOfDebtToDelete = variableEntries.EnterPersonID();
                             personDAL.Delete(transaction, command, idOfDebtToDelete);
+                            logHelper.GetLog().Info("Debt was deleted");
                             break;
                         case 'n':
                             //Print Name, Surname, debtAountSum
@@ -198,6 +222,7 @@ namespace Task5
                             }
                             dataReader.Close();
                             transaction.Commit();
+                            logHelper.GetLog().Info("SelectAllPersonsWithDebtSum");
                             break;
                         case 'o':
                              PrintPersonTableWithDebtPaymentBalanceAmount(command, transaction);
@@ -216,6 +241,7 @@ namespace Task5
                             }
                             dataReader1.Close();
                             transaction.Commit();
+                            logHelper.GetLog().Info("Select All Persons With DebtSum PaymnetSum Balance");
                             break;
                         case 'q':
 
@@ -246,12 +272,11 @@ namespace Task5
                         // a closed connection.
                         Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
                         Console.WriteLine("  Message: {0}", ex2.Message);
+                        logHelper.GetLog().Error(ex2);
                     }
                     connection.Close();
 
-                    eventLogClass.LogError(ex.Message);
-
-
+                    logHelper.GetLog().Error(ex);
                     Console.WriteLine("Press key to continue...");
                     Console.ReadKey();
                 }
@@ -286,6 +311,7 @@ namespace Task5
         }
 
         VariableEntries textEntries = new VariableEntries();
+
         public Person CreateNewPerson()
         {
             Console.Clear();
@@ -295,6 +321,13 @@ namespace Task5
             person.PhoneNumber = textEntries.WriteNewPhoneNumber();
 
             return person;
+        }
+
+        internal Debt CreateNeDebt()
+        {
+            Debt debt = new Debt(variableEntries.EnterPersonID(), DateTime.Now, variableEntries.EnterDebtAmount());
+
+            return debt;
         }
 
     }

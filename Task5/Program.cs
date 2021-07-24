@@ -1,12 +1,12 @@
-﻿using System.Configuration;
-
-
-
+﻿using log4net;
+using System;
+using System.Configuration;
 
 namespace Task5
 {
     class Program
     {
+        static protected ILog log = LogManager.GetLogger("");
         static void Main(string[] args)
          {
 
@@ -14,15 +14,11 @@ namespace Task5
             
             AppController appController = new AppController();
 
-            appController.StartApplication(ConnectingString);
+            //appController.StartApplication(ConnectingString);
 
-
-            
-
-
+            Console.ReadKey();
 
         }        
     }
-
 
 }

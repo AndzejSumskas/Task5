@@ -36,21 +36,13 @@ namespace Task5
                 Console.WriteLine("m - Delete debt from DB");
                 Console.WriteLine("n - Write Name, Surname, debtAmountSum to console");
                 Console.WriteLine("p - Write Name, Surname, debtAmountSum, paymentAmountSum, balance to console");
-
-
-
                 Console.WriteLine("q - Exit");
-
 
                 select = Console.ReadKey().KeyChar;
                 Console.WriteLine();
 
                 transaction.ExecuteSqlTransaction(connectionString, select);
-
             }
-        }
-
-       
-
+        }    
     }
 }

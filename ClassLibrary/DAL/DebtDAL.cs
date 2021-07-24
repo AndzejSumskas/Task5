@@ -5,25 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Task5
+namespace ClassLibrary
 {
-    class DebtDAL
+    public class DebtDAL
     {
-        internal void WriteToConsole(SqlCommand command, SqlTransaction transaction)
-        {
-            command.CommandText = "Select ID, PERSON_ID, R_DATE, DEBT_AMOUNT from DEBTS";
-
-            SqlDataReader dataReader = command.ExecuteReader();
-
-            while (dataReader.Read())
-            {
-                Console.WriteLine($"{dataReader.GetValue(0)} {dataReader.GetValue(1)} {dataReader.GetValue(2)} {dataReader.GetValue(3)}");
-            }
-            dataReader.Close();
-            transaction.Commit();
-        }
-
-        internal List<Debt> GetList(SqlCommand command, SqlTransaction transaction)
+        public List<Debt> GetList(SqlCommand command, SqlTransaction transaction)
         {
             List<Debt> data = new List<Debt>();
 
@@ -41,7 +27,7 @@ namespace Task5
             return data;
         }
 
-        internal int Add(SqlCommand command, SqlTransaction transaction, Debt debt)
+        public int Add(SqlCommand command, SqlTransaction transaction, Debt debt)
         {
             command.CommandText = $"INSERT INTO DEBTS(PERSON_ID, R_DATE, DEBT_AMOUNT) VALUES(@0,@1,@2); Select SCOPE_IDENTITY();";
             command.Parameters.AddWithValue("@0", debt.PersonId);
@@ -55,7 +41,7 @@ namespace Task5
             return id;
         }
 
-        internal List<Debt> GetSearchList(SqlTransaction transaction, SqlCommand command, int personID)
+        public List<Debt> GetSearchList(SqlTransaction transaction, SqlCommand command, int personID)
         {
             List<Debt> data = new List<Debt>();
 
@@ -72,7 +58,7 @@ namespace Task5
             return data;
         }
 
-        internal void Update(SqlTransaction transaction, SqlCommand command, int id, char select, int personID, string date, double debtAmount)
+        public void Update(SqlTransaction transaction, SqlCommand command, int id, char select, int personID, string date, double debtAmount)
         {
             switch (select)
             {
@@ -103,7 +89,7 @@ namespace Task5
             transaction.Commit();
         }
 
-        internal void Delete(SqlTransaction transaction, SqlCommand command, int id)
+        public void Delete(SqlTransaction transaction, SqlCommand command, int id)
         {
             command.CommandText = $"DELETE FROM DEBTS WHERE ID = @0";
             command.Parameters.AddWithValue("@0", id);

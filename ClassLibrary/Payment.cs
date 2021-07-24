@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Task5
+namespace ClassLibrary
 {
-    class Payment
+    public class Payment
     {
         internal int Id { get; set; }
         internal int PersonId { get; set; }

@@ -4,16 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Task5
+namespace ClassLibrary
 {
-    class Debt
+    public class Debt
     {
-        internal int Id { get; set; }
-        internal DateTime Date { get; set; }
-        internal int PersonId { get; set; }
-        internal double Amount { get; set; }
-
-        private VariableEntries variableEntries = new VariableEntries();
+        public int Id { get; set; }
+        public DateTime Date { get; set; }
+        public int PersonId { get; set; }
+        public double Amount { get; set; }
 
         public Debt()
         {
@@ -34,11 +32,6 @@ namespace Task5
             Amount = deptAmount;
         }
 
-        internal Debt CreateNeDebt()
-        {
-            Debt debt = new Debt(variableEntries.EnterPersonID(), DateTime.Now, variableEntries.EnterDebtAmount());
 
-            return debt;
-        }
     }
 }
