@@ -3,3 +3,189 @@
 21:10:20,234 [Task5.LogHelper] INFO - Persons was writed to console
 21:10:20,544 [Task5.LogHelper] INFO - Persons was writed to console
 21:10:20,777 [Task5.LogHelper] INFO - Persons was writed to console
+13:09:47,378 [Task5.LogHelper] INFO - Persons was writed to console
+13:09:48,525 [Task5.LogHelper] INFO - Persons was writed to console
+13:09:48,876 [Task5.LogHelper] INFO - Persons was writed to console
+13:09:49,199 [Task5.LogHelper] INFO - Persons was writed to console
+13:09:49,485 [Task5.LogHelper] INFO - Persons was writed to console
+13:09:49,749 [Task5.LogHelper] INFO - Persons was writed to console
+13:09:50,013 [Task5.LogHelper] INFO - Persons was writed to console
+10:50:17,336 [Task5.LogHelper] INFO - Search completed
+10:50:27,695 [Task5.LogHelper] INFO - Search completed
+10:50:35,723 [Task5.LogHelper] INFO - Search completed
+17:00:43,358 [Task5.LogHelper] INFO - Person was deleted
+17:00:48,097 [Task5.LogHelper] INFO - Persons was writed to console
+17:55:13,214 [Task5.LogHelper] INFO - Persons was writed to console
+17:55:14,549 [Task5.LogHelper] INFO - Persons was writed to console
+17:55:19,961 [Task5.LogHelper] INFO - Debts was writed to console.
+17:55:21,593 [Task5.LogHelper] INFO - Debts was writed to console.
+17:55:22,631 [Task5.LogHelper] INFO - Persons was writed to console
+17:55:23,550 [Task5.LogHelper] INFO - Persons was writed to console
+17:55:24,667 [Task5.LogHelper] INFO - Persons was writed to console
+17:55:25,494 [Task5.LogHelper] INFO - Debts was writed to console.
+10:21:45,161 [Task5.LogHelper] INFO - Persons was writed to console
+10:48:58,436 [Task5.LogHelper] INFO - Persons was writed to console
+10:48:58,993 [Task5.LogHelper] INFO - Persons was writed to console
+15:02:15,791 [ClassLibrary.PersonDAL] INFO - Persons was writed to console
+15:02:15,803 [Task5.LogHelper] INFO - Persons was writed to console
+15:02:16,537 [ClassLibrary.PersonDAL] INFO - Persons was writed to console
+15:02:16,542 [Task5.LogHelper] INFO - Persons was writed to console
+15:02:16,911 [ClassLibrary.PersonDAL] INFO - Persons was writed to console
+15:02:16,919 [Task5.LogHelper] INFO - Persons was writed to console
+15:02:17,239 [ClassLibrary.PersonDAL] INFO - Persons was writed to console
+15:02:17,248 [Task5.LogHelper] INFO - Persons was writed to console
+15:02:19,798 [ClassLibrary.PersonDAL] INFO - Persons was writed to console
+15:02:19,878 [Task5.LogHelper] INFO - All files was writen to json file.
+15:02:25,035 [Task5.LogHelper] INFO - Debts was writed to console.
+15:44:08,630 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+15:44:08,646 [Task5.LogHelper] INFO - Persons was writed to console
+15:44:12,078 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+15:44:12,140 [Task5.LogHelper] INFO - All files was writen to json file.
+15:44:25,900 [ClassLibrary.PersonDAL] INFO - Added to DB with id = 124
+15:44:25,900 [Task5.LogHelper] INFO - Added person id = 124
+15:44:40,547 [ClassLibrary.PersonDAL] INFO - Search completed.
+15:44:40,547 [Task5.LogHelper] INFO - Search completed
+15:45:17,331 [ClassLibrary.PersonDAL] INFO - Data updated.
+15:45:17,331 [Task5.LogHelper] INFO - Person was updated
+15:45:32,683 [ClassLibrary.PersonDAL] INFO - Person was deleted.
+15:45:32,683 [Task5.LogHelper] INFO - Person was deleted
+17:47:31,500 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+20:02:55,367 [ClassLibrary.PersonDAL] INFO - The application has started.
+20:03:04,676 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+20:03:04,686 [ClassLibrary.PersonDAL] INFO - Persons from DB was writed to console.
+20:03:11,952 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+20:03:12,027 [ClassLibrary.PersonDAL] INFO - Persons data was writed to json file.
+20:03:37,675 [ClassLibrary.PersonDAL] INFO - Person was created.
+20:03:37,683 [ClassLibrary.PersonDAL] INFO - Added to DB with id = 125
+20:03:48,963 [ClassLibrary.PersonDAL] INFO - Search completed.
+20:03:48,963 [ClassLibrary.PersonDAL] INFO - Search results writed to console.
+20:03:57,805 [ClassLibrary.PersonDAL] INFO - Search completed.
+20:03:57,805 [ClassLibrary.PersonDAL] INFO - Search results writed to console.
+20:04:29,371 [ClassLibrary.PersonDAL] INFO - Data updated.
+20:04:32,959 [ClassLibrary.PersonDAL] WARN - Wrong select was maded.
+20:04:39,906 [ClassLibrary.PersonDAL] INFO - Person was deleted.
+20:04:41,747 [ClassLibrary.PersonDAL] INFO - Returned to the main menu.
+20:04:42,856 [ClassLibrary.PersonDAL] INFO - Returned to the main menu.
+20:04:43,060 [ClassLibrary.PersonDAL] INFO - Returned to the main menu.
+20:04:43,227 [ClassLibrary.PersonDAL] INFO - Returned to the main menu.
+20:04:43,390 [ClassLibrary.PersonDAL] INFO - Returned to the main menu.
+20:04:43,560 [ClassLibrary.PersonDAL] INFO - Returned to the main menu.
+20:04:43,719 [ClassLibrary.PersonDAL] INFO - Returned to the main menu.
+20:04:43,880 [ClassLibrary.PersonDAL] INFO - Returned to the main menu.
+20:04:44,019 [ClassLibrary.PersonDAL] INFO - Returned to the main menu.
+20:04:44,162 [ClassLibrary.PersonDAL] INFO - Returned to the main menu.
+20:04:45,020 [ClassLibrary.PersonDAL] INFO - Returned to the main menu.
+20:04:45,279 [ClassLibrary.PersonDAL] INFO - Returned to the main menu.
+20:04:45,496 [ClassLibrary.PersonDAL] INFO - Returned to the main menu.
+20:04:45,700 [ClassLibrary.PersonDAL] INFO - Returned to the main menu.
+20:04:45,892 [ClassLibrary.PersonDAL] INFO - Returned to the main menu.
+20:07:54,981 [ClassLibrary.PersonDAL] INFO - The application has started.
+20:07:58,569 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+20:07:58,581 [ClassLibrary.PersonDAL] INFO - Persons from DB was writed to console.
+20:07:59,895 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+20:07:59,904 [ClassLibrary.PersonDAL] INFO - Persons from DB was writed to console.
+20:08:00,383 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+20:08:00,394 [ClassLibrary.PersonDAL] INFO - Persons from DB was writed to console.
+20:08:00,861 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+20:08:00,870 [ClassLibrary.PersonDAL] INFO - Persons from DB was writed to console.
+20:55:49,025 [Task5.AppController] INFO - The application has started.
+20:55:53,986 [Task5.AppController] INFO - Actions with Persons menu.
+20:55:56,353 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+20:55:56,363 [Task5.AppController] INFO - Persons from DB was writed to console.
+20:55:58,425 [Task5.AppController] INFO - Actions with Persons menu.
+20:56:04,814 [Task5.AppController] INFO - New payment amount was writed.
+20:56:04,825 [ClassLibrary.PersonDAL] INFO - Person was deleted.
+20:56:04,825 [Task5.AppController] INFO - Actions with Persons menu.
+20:56:07,284 [Task5.AppController] INFO - Returned to the main menu.
+20:56:11,113 [Task5.AppController] INFO - Actions with Persons, Debts and Payments menu.
+20:56:13,383 [ClassLibrary.ExtraDAL] INFO - Created list from DB.
+20:56:13,384 [Task5.AppController] INFO - Persons with debt sum writed to console.
+20:56:16,182 [ClassLibrary.ExtraDAL] ERROR - System.InvalidCastException
+20:56:16,184 [ClassLibrary.ExtraDAL] ERROR - Object cannot be cast from DBNull to other types.
+20:56:16,184 [ClassLibrary.ExtraDAL] INFO - Created list from DB.
+20:56:16,184 [Task5.AppController] INFO - Persons with debt sum, payment sum and balance writed to console.
+20:56:17,428 [ClassLibrary.ExtraDAL] ERROR - System.InvalidCastException
+20:56:17,428 [ClassLibrary.ExtraDAL] ERROR - Object cannot be cast from DBNull to other types.
+20:56:17,428 [ClassLibrary.ExtraDAL] INFO - Created list from DB.
+20:56:17,429 [Task5.AppController] INFO - Persons with debt sum, payment sum and balance writed to console.
+20:56:17,946 [ClassLibrary.ExtraDAL] INFO - Created list from DB.
+20:56:17,947 [Task5.AppController] INFO - Persons with debt sum writed to console.
+20:56:18,281 [ClassLibrary.ExtraDAL] ERROR - System.InvalidCastException
+20:56:18,281 [ClassLibrary.ExtraDAL] ERROR - Object cannot be cast from DBNull to other types.
+20:56:18,281 [ClassLibrary.ExtraDAL] INFO - Created list from DB.
+20:56:18,282 [Task5.AppController] INFO - Persons with debt sum, payment sum and balance writed to console.
+20:56:18,618 [ClassLibrary.ExtraDAL] INFO - Created list from DB.
+20:56:18,618 [Task5.AppController] INFO - Persons with debt sum writed to console.
+20:56:18,905 [ClassLibrary.ExtraDAL] ERROR - System.InvalidCastException
+20:56:18,905 [ClassLibrary.ExtraDAL] ERROR - Object cannot be cast from DBNull to other types.
+20:56:18,905 [ClassLibrary.ExtraDAL] INFO - Created list from DB.
+20:56:18,905 [Task5.AppController] INFO - Persons with debt sum, payment sum and balance writed to console.
+20:56:19,170 [ClassLibrary.ExtraDAL] INFO - Created list from DB.
+20:56:19,171 [Task5.AppController] INFO - Persons with debt sum writed to console.
+20:56:19,370 [ClassLibrary.ExtraDAL] INFO - Created list from DB.
+20:56:19,371 [Task5.AppController] INFO - Persons with debt sum writed to console.
+20:56:21,416 [Task5.AppController] INFO - Returned to the main menu.
+20:56:22,341 [Task5.AppController] INFO - Returned to the main menu.
+20:56:22,562 [Task5.AppController] INFO - Returned to the main menu.
+20:56:22,756 [Task5.AppController] INFO - Returned to the main menu.
+20:56:23,344 [Task5.AppController] INFO - Returned to the main menu.
+20:56:23,540 [Task5.AppController] INFO - Returned to the main menu.
+20:56:23,709 [Task5.AppController] INFO - Returned to the main menu.
+20:56:23,856 [Task5.AppController] INFO - Returned to the main menu.
+20:56:24,040 [Task5.AppController] INFO - Returned to the main menu.
+20:56:24,297 [Task5.AppController] INFO - Returned to the main menu.
+20:56:24,508 [Task5.AppController] INFO - Returned to the main menu.
+20:56:24,721 [Task5.AppController] INFO - Returned to the main menu.
+20:56:24,924 [Task5.AppController] INFO - Returned to the main menu.
+20:56:25,120 [Task5.AppController] INFO - Returned to the main menu.
+20:56:25,321 [Task5.AppController] INFO - Returned to the main menu.
+20:56:25,529 [Task5.AppController] INFO - Returned to the main menu.
+20:59:13,331 [Task5.AppController] INFO - The application has started.
+20:59:14,581 [Task5.AppController] INFO - Actions with Persons menu.
+20:59:18,038 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+20:59:18,054 [Task5.AppController] INFO - Persons from DB was writed to console.
+20:59:18,895 [Task5.AppController] INFO - Actions with Persons menu.
+20:59:26,003 [ClassLibrary.PersonDAL] INFO - Search completed.
+20:59:26,003 [Task5.AppController] INFO - Search results writed to console.
+20:59:26,003 [Task5.AppController] INFO - Actions with Persons menu.
+20:59:56,289 [Task5.AppController] INFO - The application has started.
+20:59:58,293 [Task5.AppController] INFO - Actions with Persons menu.
+21:00:04,723 [ClassLibrary.PersonDAL] INFO - Search completed.
+21:00:04,723 [Task5.AppController] INFO - Search results writed to console.
+21:00:04,723 [Task5.AppController] INFO - Actions with Persons menu.
+21:00:11,785 [ClassLibrary.PersonDAL] INFO - Search completed.
+21:00:14,448 [Task5.AppController] INFO - Search results writed to console.
+21:00:14,448 [Task5.AppController] INFO - Actions with Persons menu.
+21:00:20,315 [ClassLibrary.PersonDAL] INFO - Search completed.
+21:00:22,187 [Task5.AppController] INFO - Search results writed to console.
+21:00:22,187 [Task5.AppController] INFO - Actions with Persons menu.
+21:00:29,313 [ClassLibrary.PersonDAL] INFO - Search completed.
+21:00:29,920 [Task5.AppController] INFO - Search results writed to console.
+21:00:29,920 [Task5.AppController] INFO - Actions with Persons menu.
+21:00:41,671 [Task5.AppController] INFO - The application has started.
+21:00:43,909 [Task5.AppController] INFO - Actions with Persons menu.
+21:02:40,717 [Task5.AppController] INFO - The application has started.
+21:02:42,172 [Task5.AppController] INFO - Actions with Persons menu.
+21:02:46,472 [ClassLibrary.PersonDAL] INFO - Search by id completed.
+21:02:51,404 [Task5.AppController] INFO - Search results writed to console.
+21:02:51,404 [Task5.AppController] INFO - Actions with Persons menu.
+21:02:58,480 [Task5.AppController] INFO - Returned to the main menu.
+21:03:00,682 [Task5.AppController] INFO - Actions with Persons, Debts and Payments menu.
+21:03:01,867 [ClassLibrary.ExtraDAL] INFO - Created list from DB.
+21:03:17,062 [Task5.AppController] INFO - Persons with debt sum writed to console.
+21:03:19,932 [ClassLibrary.ExtraDAL] ERROR - System.InvalidCastException
+21:03:19,933 [ClassLibrary.ExtraDAL] ERROR - Object cannot be cast from DBNull to other types.
+21:03:19,933 [ClassLibrary.ExtraDAL] INFO - Created list from DB.
+21:03:41,554 [Task5.AppController] INFO - Persons with debt sum, payment sum and balance writed to console.
+21:05:48,885 [Task5.AppController] INFO - The application has started.
+21:05:49,451 [Task5.AppController] INFO - Actions with Persons, Debts and Payments menu.
+21:05:50,697 [ClassLibrary.ExtraDAL] INFO - Created list from DB.
+21:07:22,281 [Task5.AppController] INFO - The application has started.
+21:07:22,711 [Task5.AppController] INFO - Actions with Persons, Debts and Payments menu.
+21:07:23,691 [ClassLibrary.ExtraDAL] ERROR - System.InvalidCastException
+21:07:23,692 [ClassLibrary.ExtraDAL] ERROR - Object cannot be cast from DBNull to other types.
+21:07:23,692 [ClassLibrary.ExtraDAL] INFO - Created list from DB.
+21:11:17,483 [Task5.AppController] INFO - Persons with debt sum, payment sum and balance writed to console.
+21:13:36,122 [ClassLibrary.ExtraDAL] ERROR - System.InvalidCastException
+21:13:36,123 [ClassLibrary.ExtraDAL] ERROR - Object cannot be cast from DBNull to other types.
+21:13:36,123 [ClassLibrary.ExtraDAL] INFO - Created list from DB.

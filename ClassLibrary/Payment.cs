@@ -8,9 +8,17 @@ namespace ClassLibrary
 {
     public class Payment
     {
-        internal int Id { get; set; }
-        internal int PersonId { get; set; }
-        internal DateTime Date { get; set; }
-        internal double PaymentAmount { get; set; }
+        public int Id { get; set; }
+        public int PersonId { get; set; }
+        public DateTime Date { get; set; }
+        public double PaymentAmount { get; set; }
+
+        public Payment(int id, int personId, DateTime date, double paymentAmount)
+        {
+            Id = id;
+            PersonId = personId;
+            Date = date;
+            PaymentAmount = paymentAmount;
+        }
     }
 }

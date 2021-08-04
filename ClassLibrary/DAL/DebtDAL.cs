@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -9,93 +10,178 @@ namespace ClassLibrary
 {
     public class DebtDAL
     {
-        public List<Debt> GetList(SqlCommand command, SqlTransaction transaction)
+        private string ConnetctionString = ConfigurationManager.AppSettings.Get("PerPath");
+
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(DebtDAL));
+
+        public List<Debt> GetList()
         {
-            List<Debt> data = new List<Debt>();
-
-            command.CommandText = $"Select ID, PERSON_ID, R_DATE, DEBT_AMOUNT from DEBTS";
-
-            SqlDataReader dataReader = command.ExecuteReader();
-
-            while (dataReader.Read())
+            using (SqlConnection connection = new SqlConnection(ConnetctionString))
             {
-                data.Add(new Debt(Convert.ToInt32(dataReader.GetValue(0)), Convert.ToInt32(dataReader.GetValue(1)), Convert.ToDateTime(dataReader.GetValue(2)), Convert.ToDouble(dataReader.GetValue(3).ToString())));
+                connection.Open();
+
+                SqlCommand command = connection.CreateCommand();
+                List<Debt> data = new List<Debt>();
+                command.Connection = connection;
+
+                try
+                {
+                    command.CommandText = $"Select ID, PERSON_ID, R_DATE, DEBT_AMOUNT from DEBTS";
+
+                    SqlDataReader dataReader = command.ExecuteReader();
+
+                    while (dataReader.Read())
+                    {
+                        data.Add(new Debt(Convert.ToInt32(dataReader.GetValue(0)), Convert.ToInt32(dataReader.GetValue(1)), Convert.ToDateTime(dataReader.GetValue(2)), Convert.ToDouble(dataReader.GetValue(3).ToString())));
+                    }
+                    dataReader.Close();
+                }
+
+                catch (Exception ex)
+                {
+                    log.Error(ex.GetType());
+                    log.Error(ex.Message);
+                }
+                connection.Close();
+                log.Info("Created list from DB.");
+                return data;
             }
-
-            dataReader.Close();
-            transaction.Commit();
-            return data;
         }
 
-        public int Add(SqlCommand command, SqlTransaction transaction, Debt debt)
+        public int Add(Debt debt)
         {
-            command.CommandText = $"INSERT INTO DEBTS(PERSON_ID, R_DATE, DEBT_AMOUNT) VALUES(@0,@1,@2); Select SCOPE_IDENTITY();";
-            command.Parameters.AddWithValue("@0", debt.PersonId);
-            command.Parameters.AddWithValue("@1", debt.Date);
-            command.Parameters.AddWithValue("@2", debt.Amount);
-
-
-            int id = Convert.ToInt32(command.ExecuteScalar());
-
-            transaction.Commit();
-            return id;
-        }
-
-        public List<Debt> GetSearchList(SqlTransaction transaction, SqlCommand command, int personID)
-        {
-            List<Debt> data = new List<Debt>();
-
-            command.CommandText = $"Select ID, PERSON_ID, R_DATE, DEBT_AMOUNT FROM DEBTS WHERE PERSON_ID  = @0";
-            command.Parameters.AddWithValue("@0", personID);
-            SqlDataReader dataReader = command.ExecuteReader();
-
-            while (dataReader.Read())
+            using (SqlConnection connection = new SqlConnection(ConnetctionString))
             {
-                data.Add(new Debt(Convert.ToInt32(dataReader.GetValue(0)), Convert.ToInt32(dataReader.GetValue(1)), Convert.ToDateTime(dataReader.GetValue(2)), Convert.ToDouble(dataReader.GetValue(3).ToString())));
+                connection.Open();
+
+                SqlCommand command = connection.CreateCommand();
+                command.Connection = connection;
+                int id = 0;
+
+                try
+                {
+                    command.CommandText = $"INSERT INTO DEBTS(PERSON_ID, R_DATE, DEBT_AMOUNT) VALUES(@0,@1,@2); Select SCOPE_IDENTITY();";
+                    command.Parameters.AddWithValue("@0", debt.PersonId);
+                    command.Parameters.AddWithValue("@1", debt.Date);
+                    command.Parameters.AddWithValue("@2", debt.Amount);
+
+                    id = Convert.ToInt32(command.ExecuteScalar());
+                }
+
+                catch (Exception ex)
+                {
+                    log.Error(ex.GetType());
+                    log.Error(ex.Message);
+                }
+                connection.Close();
+                log.Info($"Added to DB with id = {id}");
+                return id;
             }
-            
-            transaction.Commit();
-            return data;
         }
 
-        public void Update(SqlTransaction transaction, SqlCommand command, int id, char select, int personID, string date, double debtAmount)
+        public List<Debt> GetSearchList(int personID)
         {
-            switch (select)
+            using (SqlConnection connection = new SqlConnection(ConnetctionString))
             {
-                case '1':
-                    command.CommandText = $"UPDATE DEBTS SET PERSON_ID = @0 WHERE ID = @1";
+                connection.Open();
+                List<Debt> data = new List<Debt>();
+                SqlCommand command = connection.CreateCommand();
+                command.Connection = connection;
+
+                try
+                {
+                    command.CommandText = $"Select ID, PERSON_ID, R_DATE, DEBT_AMOUNT FROM DEBTS WHERE PERSON_ID  = @0";
                     command.Parameters.AddWithValue("@0", personID);
-                    command.Parameters.AddWithValue("@1", id);
-                    break;
-                case '2':
-                    command.CommandText = $"UPDATE DEBTS SET SET R_DATE = @0 WHERE ID = @1";
-                    command.Parameters.AddWithValue("@0", date);
-                    command.Parameters.AddWithValue("@1", id);
-                    break;
-                case '3':
-                    command.CommandText = $"UPDATE DEBTS SET DEBT_AMOUNT = @0 WHERE ID = @1";
-                    command.Parameters.AddWithValue("@0", debtAmount);
-                    command.Parameters.AddWithValue("@1", id);
-                    break;
-                case '4':
-                    command.CommandText = $"UPDATE DEBTS SET PERSON_ID = @0, R_DATE = @1, DEBT_AMOUNT = @2 WHERE ID = @3";
-                    command.Parameters.AddWithValue("@0", personID);
-                    command.Parameters.AddWithValue("@1", date);
-                    command.Parameters.AddWithValue("@2", debtAmount);
-                    command.Parameters.AddWithValue("@3", id);
-                    break;
+                    SqlDataReader dataReader = command.ExecuteReader();
+
+                    while (dataReader.Read())
+                    {
+                        data.Add(new Debt(Convert.ToInt32(dataReader.GetValue(0)), Convert.ToInt32(dataReader.GetValue(1)), Convert.ToDateTime(dataReader.GetValue(2)), Convert.ToDouble(dataReader.GetValue(3).ToString())));
+                    }
+                }
+
+                catch (Exception ex)
+                {
+                    log.Error(ex.GetType());
+                    log.Error(ex.Message);
+                }
+                connection.Close();
+                log.Info($"Search completed.");
+                return data;
             }
-            command.ExecuteNonQuery();
-            transaction.Commit();
         }
 
-        public void Delete(SqlTransaction transaction, SqlCommand command, int id)
+        public void Update(int id, char select, int personID, string date, double debtAmount)
         {
-            command.CommandText = $"DELETE FROM DEBTS WHERE ID = @0";
-            command.Parameters.AddWithValue("@0", id);
-            command.ExecuteNonQuery();
+            using (SqlConnection connection = new SqlConnection(ConnetctionString))
+            {
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+                command.Connection = connection;
 
-            transaction.Commit();
+                try
+                {
+                    switch (select)
+                    {
+                        case '1':
+                            command.CommandText = $"UPDATE DEBTS SET PERSON_ID = @0 WHERE ID = @1";
+                            command.Parameters.AddWithValue("@0", personID);
+                            command.Parameters.AddWithValue("@1", id);
+                            break;
+                        case '2':
+                            command.CommandText = $"UPDATE DEBTS SET SET R_DATE = @0 WHERE ID = @1";
+                            command.Parameters.AddWithValue("@0", date);
+                            command.Parameters.AddWithValue("@1", id);
+                            break;
+                        case '3':
+                            command.CommandText = $"UPDATE DEBTS SET DEBT_AMOUNT = @0 WHERE ID = @1";
+                            command.Parameters.AddWithValue("@0", debtAmount);
+                            command.Parameters.AddWithValue("@1", id);
+                            break;
+                        case '4':
+                            command.CommandText = $"UPDATE DEBTS SET PERSON_ID = @0, R_DATE = @1, DEBT_AMOUNT = @2 WHERE ID = @3";
+                            command.Parameters.AddWithValue("@0", personID);
+                            command.Parameters.AddWithValue("@1", date);
+                            command.Parameters.AddWithValue("@2", debtAmount);
+                            command.Parameters.AddWithValue("@3", id);
+                            break;
+                    }
+                    command.ExecuteNonQuery();
+                }
+
+                catch (Exception ex)
+                {
+                    log.Error(ex.GetType());
+                    log.Error(ex.Message);
+                }
+                connection.Close();
+                log.Info("Data updated.");
+            }
+        }
+
+        public void Delete(int id)
+        {
+            using (SqlConnection connection = new SqlConnection(ConnetctionString))
+            {
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+                command.Connection = connection;
+
+                try
+                {
+                    command.CommandText = $"DELETE FROM DEBTS WHERE ID = @0";
+                    command.Parameters.AddWithValue("@0", id);
+                    command.ExecuteNonQuery();
+                }
+
+                catch (Exception ex)
+                {
+                    log.Error(ex.GetType());
+                    log.Error(ex.Message);
+                }
+                connection.Close();
+                log.Info("Debt was deleted.");
+            }         
         }
     }
 }

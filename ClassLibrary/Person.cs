@@ -30,6 +30,14 @@ namespace ClassLibrary
             PhoneNumber = phoneNumber;
         }
 
+        public Person(int id, string name, string surName, double debtSumAmount)
+        {
+            Id = id;
+            Name = name;
+            SurName = surName;
+            DebtSumAmount = debtSumAmount;
+        }
+
         public Person(int id, string name, string surName, string phoneNumber)
         {
             Id = id;
@@ -45,6 +53,11 @@ namespace ClassLibrary
             SurName = surName;
             DebtSumAmount = debtSumAmount;
             PaymentSumAmount = paymentSumAmount;
+        }
+
+        public Person(int id, string name, string surName, double debtSumAmount, double paymentSumAmount, double balance) : this(id, name, surName, debtSumAmount, paymentSumAmount)
+        {
+            Balance = balance;
         }
     }
 }

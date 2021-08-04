@@ -8,10 +8,13 @@ namespace Task5
 {
     class VariableEntries
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(AppController));
+
         internal string WriteNewName()
         {
             Console.WriteLine("Enter the name:");
             string Name = Console.ReadLine();
+            log.Info("New name was writed.");
             return Name;
         }
 
@@ -19,6 +22,7 @@ namespace Task5
         {
             Console.WriteLine("Enter the surname:");
             string surName = Console.ReadLine();
+            log.Info("New surname was writed.");
             return surName;
         }
 
@@ -32,6 +36,7 @@ namespace Task5
                 Console.Write("Enter phone number\n +370");
                 telephonNumber = Convert.ToInt32(Console.ReadLine());
             }
+            log.Info("New phone number was writed.");
             return "+370" + telephonNumber;
         }
 
@@ -40,6 +45,7 @@ namespace Task5
             Console.Clear();
             Console.WriteLine("Enter debt amount");
             double debtAmount = Convert.ToDouble(Console.ReadLine());
+            log.Info("New debt amount was writed.");
             return debtAmount;
         }
 
@@ -48,6 +54,7 @@ namespace Task5
             Console.Clear();
             Console.WriteLine("Enter person id");
             int personId = Convert.ToInt32(Console.ReadLine());
+            log.Info("New payment amount was writed.");
             return personId;
         }
     }

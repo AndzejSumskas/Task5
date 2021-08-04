@@ -10,7 +10,7 @@ using ClassLibrary;
 
 namespace Task5
 {
-    class Transaction
+    public class Transaction
     {
         private PersonDAL personDAL = new PersonDAL();
         private DebtDAL debtDAL = new DebtDAL();
@@ -38,7 +38,7 @@ namespace Task5
                     switch (select)
                     {
                         case 'a':
-                            var persons1 = personDAL.GetList(command, transaction);
+                            var persons1 = personDAL.GetList();
 
                             foreach (var person in persons1)
                             {
@@ -47,7 +47,7 @@ namespace Task5
                             logHelper.GetLog().Info("Persons was writed to console");
                             break;
                         case 'b':
-                            var persons = personDAL.GetList(command, transaction);
+                            var persons = personDAL.GetList();
                             List<string> personsData = new List<string>();
 
                             foreach (var person in persons)
@@ -60,14 +60,14 @@ namespace Task5
                             break;
                         case 'c':
                             Person newPerson = CreateNewPerson();
-                            int addedId = personDAL.Add(command, transaction, newPerson);
+                            int addedId = personDAL.Add(newPerson);
                             logHelper.GetLog().Info("Added person id = " + addedId);
                             //Console.WriteLine("Added person id = " + addedId);
                             break;
                         case 'd':
                             Console.WriteLine("Make a search:");
                             string search = Console.ReadLine();
-                            var data = personDAL.GetSearchList(transaction, command, search);
+                            var data = personDAL.GetSearchList(search);
                             foreach (var person in data)
                             {
                                 Console.WriteLine($"{person.Id} {person.Name} {person.SurName} {person.PhoneNumber}");
@@ -112,18 +112,17 @@ namespace Task5
 
                             if (selectOption == '1' || selectOption == '2' || selectOption == '3' || selectOption == '4')
                             {
-                                personDAL.Update(transaction, command, personId, selectOption, name, surName, phoneNumber);
+                                personDAL.Update(personId, selectOption, name, surName, phoneNumber);
                             }
                             logHelper.GetLog().Info("Person was updated");
-                            //Console.WriteLine("Person was updated");
                             break;
                         case 'f':
                             int idOfPersonToDelete = variableEntries.EnterPersonID();
-                            personDAL.Delete(transaction, command, idOfPersonToDelete);
+                            personDAL.Delete(idOfPersonToDelete);
                             logHelper.GetLog().Info("Person was deleted");
                             break;
                         case 'g':
-                            var debts1 = debtDAL.GetList(command, transaction);
+                            var debts1 = debtDAL.GetList();
                             foreach (var debt in debts1)
                             {
                                 Console.WriteLine($"{debt.Id} {debt.PersonId} {debt.Date} {debt.Amount}");
@@ -131,7 +130,7 @@ namespace Task5
                             logHelper.GetLog().Info("Debts was writed to console.");
                             break;
                         case 'h':
-                            var debts = debtDAL.GetList(command, transaction);
+                            var debts = debtDAL.GetList();
                             List<string> debtsData = new List<string>();
 
                             foreach (var debt in debts)
@@ -145,14 +144,14 @@ namespace Task5
                             break;
                         case 'i':
                             Debt newDebt = CreateNeDebt();
-                            int addedID = debtDAL.Add(command, transaction, newDebt);
+                            int addedID = debtDAL.Add(newDebt);
                             //Console.WriteLine($"Added debt with id {addedID}");
                             logHelper.GetLog().Info($"Added debt with id {addedID}.");
                             break;
                         case 'j':
                             Console.WriteLine("Make a search by person id:");
                             int idSearch = Convert.ToInt32(Console.ReadLine());
-                            var searchData = debtDAL.GetSearchList(transaction, command, idSearch);
+                            var searchData = debtDAL.GetSearchList(idSearch);
                             foreach (var debt in searchData)
                             {
                                 Console.WriteLine($"{debt.Id} {debt.PersonId} {debt.Date} {debt.Amount}");
@@ -199,7 +198,7 @@ namespace Task5
 
                             if (selectOpt == '1' || selectOpt == '2' || selectOpt == '3' || selectOpt == '4')
                             {
-                                debtDAL.Update(transaction, command, IdOfPerson, selectOpt, person_id, date.ToString(), debtAmount);
+                                debtDAL.Update(IdOfPerson, selectOpt, person_id, date.ToString(), debtAmount);
 
                             }
                             //Console.WriteLine("Debt was updated");
@@ -207,7 +206,7 @@ namespace Task5
                             break;
                         case 'm':
                             int idOfDebtToDelete = variableEntries.EnterPersonID();
-                            personDAL.Delete(transaction, command, idOfDebtToDelete);
+                            personDAL.Delete(idOfDebtToDelete);
                             logHelper.GetLog().Info("Debt was deleted");
                             break;
                         case 'n':
@@ -330,5 +329,69 @@ namespace Task5
             return debt;
         }
 
+        public List<Person> ExecuteSqlTransaction2(int numberOfAction, int id, Person person)
+        {
+            string ConnectingString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Andzej\DataBaseTest.mdf;Integrated Security=True;Connect Timeout=30";
+
+
+            using (SqlConnection connection = new SqlConnection(ConnectingString))
+            {
+                connection.Open();
+
+                SqlCommand command = connection.CreateCommand();
+                SqlTransaction transaction;
+
+                transaction = connection.BeginTransaction("Transaction");
+
+                command.Connection = connection;
+                command.Transaction = transaction;
+                List<Person> persons = new List<Person>();
+
+                try
+                {
+                    switch (numberOfAction)
+                    {
+                        case 1:
+                            persons = personDAL.GetList();
+                            break;
+                        case 2:
+                            persons = personDAL.GetSearchByID(id);
+                            break;
+                        case 3:
+                            personDAL.Add(person);
+                            break;
+                        case 4:
+                            personDAL.Delete( id);
+                            break;
+                        case 5:
+                            string name = "Teodoras";
+                            string surName = "Ruzveltas";
+                            string phoneNumber = "+37062541236";
+                            personDAL.Update(id, '1', name, surName, phoneNumber);
+                            break;
+                    }
+                    
+                }
+
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Commit Exception Type: {0}", ex.GetType());
+                    Console.WriteLine("  Message: {0}", ex.Message);
+
+                    try
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (Exception ex2)
+                    {
+
+                        Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
+                        Console.WriteLine("  Message: {0}", ex2.Message);
+                    }
+                    connection.Close();     
+                }
+                return persons;
+            }
+        }
     }
 }
