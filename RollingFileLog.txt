@@ -251,3 +251,4 @@
 13:12:25,972 [Task5.AppController] INFO - The application has started.
 13:12:28,016 [Task5.AppController] INFO - Actions with Persons menu.
 13:13:13,571 [ClassLibrary.PersonDAL] INFO - Search by id completed.
+13:19:30,837 [Task5.AppController] INFO - The application has started.
