@@ -12,12 +12,13 @@ namespace ClassLibrary
 {
     public class PersonDAL
     {
-        private string ConnetctionString = ConfigurationManager.AppSettings.Get("PerPath");
+        public string ConnetctionString = ConfigurationManager.AppSettings.Get("PerPath");
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(PersonDAL));
 
         public List<Person> GetList()
         {
+            GetPath();
             using (SqlConnection connection = new SqlConnection(ConnetctionString))
             {
                 connection.Open();
@@ -115,12 +116,14 @@ namespace ClassLibrary
             }
         }
 
-        public List<Person> GetSearchByID(int id)
+        public Person GetSearchByID(int id)
         {
+            
+            GetPath();
             using (SqlConnection connection = new SqlConnection(ConnetctionString))
             {
                 connection.Open();
-                List<Person> data = new List<Person>();
+                Person person = new Person();
                 SqlCommand command = connection.CreateCommand();
                 command.Connection = connection;
 
@@ -132,7 +135,10 @@ namespace ClassLibrary
                     SqlDataReader dataReader = command.ExecuteReader();
                     while (dataReader.Read())
                     {
-                        data.Add(new Person(Convert.ToInt32(dataReader.GetValue(0)), dataReader.GetValue(1).ToString(), dataReader.GetValue(2).ToString(), dataReader.GetValue(3).ToString()));
+                        person.Id = Convert.ToInt32(dataReader.GetValue(0));
+                        person.Name = dataReader.GetValue(1).ToString();
+                        person.SurName = dataReader.GetValue(2).ToString();
+                        person.PhoneNumber = dataReader.GetValue(3).ToString();
                     }
                     dataReader.Close();
                 }
@@ -144,7 +150,7 @@ namespace ClassLibrary
                 }
                 connection.Close();
                 log.Info($"Search by id completed.");
-                return data;
+                return person;
             }       
         }
         public void Update(int id, char select, string name, string surname, string phoneNumber)
@@ -219,6 +225,10 @@ namespace ClassLibrary
                 connection.Close();
                 log.Info("Person was deleted.");
             }
+        }
+        public void GetPath()
+        {
+            ConnetctionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Andzej\DataBaseTest.mdf;Integrated Security=True;Connect Timeout=30";
         }
     }
 }

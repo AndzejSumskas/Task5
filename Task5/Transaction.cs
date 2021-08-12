@@ -346,6 +346,7 @@ namespace Task5
                 command.Connection = connection;
                 command.Transaction = transaction;
                 List<Person> persons = new List<Person>();
+                //Person person = new Person();
 
                 try
                 {
@@ -355,7 +356,7 @@ namespace Task5
                             persons = personDAL.GetList();
                             break;
                         case 2:
-                            persons = personDAL.GetSearchByID(id);
+                            //persons = personDAL.GetSearchByID(id);
                             break;
                         case 3:
                             personDAL.Add(person);

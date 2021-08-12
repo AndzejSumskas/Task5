@@ -91,20 +91,19 @@ namespace Task5
                 case '1':
                     var persons = personDAL.GetList();
 
-                    foreach (var person in persons)
+                    foreach (var person1 in persons)
                     {
-                        Console.WriteLine($"{person.Id} {person.Name} {person.SurName} {person.PhoneNumber} ");
+                        Console.WriteLine($"{person1.Id} {person1.Name} {person1.SurName} {person1.PhoneNumber} ");
                     }
                     log.Info("Persons from DB was writed to console.");
-                    Console.ReadKey();
                     break;
                 case '2':
                     var persons2 = personDAL.GetList();
                     List<string> personsData = new List<string>();
 
-                    foreach (var person in persons2)
+                    foreach (var person2 in persons2)
                     {
-                        personsData.Add($"{person.Id} {person.Name} {person.SurName} {person.PhoneNumber}");
+                        personsData.Add($"{person2.Id} {person2.Name} {person2.SurName} {person2.PhoneNumber}");
                     }
                     string json = JsonConvert.SerializeObject(personsData.ToArray(), Formatting.Indented);
                     File.WriteAllText(@"C:\Users\Andzej\Desktop\IT Tasks\HomeWork\Task5\Task5\Persons.json", json);
@@ -113,25 +112,24 @@ namespace Task5
                 case '3':
                     Person newPerson = CreateNewPerson();
                     int addedId = personDAL.Add(newPerson);
+                    log.Info("Person added to DB.");
                     break;
                 case '4':
                     Console.WriteLine("Make a search:");
                     string search = Console.ReadLine();
                     var data = personDAL.GetSearchList(search);
-                    foreach (var person in data)
+                    foreach (var person4 in data)
                     {
-                        Console.WriteLine($"{person.Id} {person.Name} {person.SurName} {person.PhoneNumber}");
+                        Console.WriteLine($"{person4.Id} {person4.Name} {person4.SurName} {person4.PhoneNumber}");
                     }
                     log.Info("Search results writed to console.");
                     break;
                 case '5':
                     Console.WriteLine("Make a search by id:");
                     int search1 = Convert.ToInt32(Console.ReadLine());
-                    var data1 = personDAL.GetSearchByID(search1);
-                    foreach (var person in data1)
-                    {
-                        Console.WriteLine($"{person.Id} {person.Name} {person.SurName} {person.PhoneNumber}");
-                    }
+                    Person person = personDAL.GetSearchByID(search1);
+                    Console.Clear();
+                    Console.WriteLine($"{person.Id} {person.Name} {person.SurName} {person.PhoneNumber}");
                     Console.ReadKey();
                     log.Info("Search results writed to console.");
                     break;
@@ -187,6 +185,8 @@ namespace Task5
                     log.Warn("Wrong select was maded.");
                     break;
             }
+            Console.WriteLine("Press button...");
+            Console.ReadKey();
         }
       
         public Person CreateNewPerson()
