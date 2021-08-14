@@ -32,6 +32,11 @@ namespace ClassLibrary
             Amount = deptAmount;
         }
 
+        public void Render(Debt debt)
+        {
+            Console.WriteLine($"Id: {debt.Id}, Date: {debt.Date}, Person ID: {debt.PersonId}, Amount: {debt.Amount}.");
+        }
+
 
     }
 }

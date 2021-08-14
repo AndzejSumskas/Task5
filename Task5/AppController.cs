@@ -40,6 +40,16 @@ namespace Task5
                         }                        
                         break;
                     case '2':
+                        while (selectActive)
+                        {
+                            log.Info("Actions with Debts menu.");
+                            char debtMenuSelect = DebtMenuSelect();
+                            ActionsWithDebts(debtMenuSelect);
+                            if (debtMenuSelect == 'q')
+                            {
+                                selectActive = false;
+                            }
+                        }
                         break;
                     case '3':
                         break;
@@ -51,6 +61,7 @@ namespace Task5
                         mainMenuActive = false;
                         break;
                     default:
+                        log.Warn("Wrong selection.");
                         break;
                 }
             }
@@ -182,7 +193,7 @@ namespace Task5
                     log.Info("Returned to the main menu.");
                     break;
                 default:
-                    log.Warn("Wrong select was maded.");
+                    log.Warn("Wrong selection.");
                     break;
             }
             Console.WriteLine("Press button...");
@@ -244,6 +255,125 @@ namespace Task5
 
             } while (selectActive);
             
+        }
+
+        private char DebtMenuSelect()
+        {
+            Console.Clear();
+            Console.WriteLine("#Actions with Persons#");
+            Console.WriteLine("1 - Write all data to console");          
+            Console.WriteLine("2 - Add");
+            Console.WriteLine("3 - Search");
+            Console.WriteLine("4 - Update");
+            Console.WriteLine("5 - Delete");
+            Console.WriteLine("q - Exit");
+
+            return Console.ReadKey().KeyChar;
+        }
+
+        public void ActionsWithDebts(char select)
+        {
+            Console.Clear();
+            switch (select)
+            {
+                case '1':
+                    List<Debt> debts = debtDAL.GetList();
+                    foreach (var debt in debts)
+                    {
+                        debt.Render(debt);
+                    }
+                    break;
+                case '2':
+                    Console.Clear();
+                    Console.WriteLine("Write person id:");
+                    int id = Convert.ToInt32(Console.ReadLine());
+                    Person person = personDAL.GetSearchByID(id);
+                    if (person.Name != null)
+                    {
+                        double debtAmount = 125;
+                        debtDAL.Add(CreateDebt(id, debtAmount));
+                        Console.WriteLine("Debt added.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("There is no Person with id: {0}", id);
+                    }
+                    Console.WriteLine("Press key to contonue...");
+                    Console.ReadKey();
+                    break;
+                case '3':
+                    Console.Clear();
+                    Console.WriteLine("Write person id:");
+                    int personId = Convert.ToInt32(Console.ReadLine());
+                    List<Debt> debts3 = debtDAL.GetSearchList(personId);
+                    if (debts3 != null)
+                    {
+                        foreach (var debt in debts3)
+                        {
+                            debt.Render(debt);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Person with id: {0} do not have any debts", personId);
+                    }
+
+                    Console.WriteLine("Press key to contonue...");
+                    Console.ReadKey();
+                    break;
+                case '4':
+                    Console.Clear();
+                    select = Console.ReadKey().KeyChar;
+
+                    int personID = 0;
+                    double debtAmount4 = 0;
+
+                    Console.WriteLine("Write debt id:");
+                    int id4 = Convert.ToInt32(Console.ReadLine());
+
+                    switch (select)
+                    {
+                        case '1':
+                            Console.WriteLine("Write person id:");
+                            personID = Convert.ToInt32(Console.ReadLine());
+                            break;
+                        case '2':
+
+                            break;
+                        case '3':
+                            Console.WriteLine("Write debt amount:");
+                            debtAmount4 = Convert.ToDouble(Console.ReadLine());
+                            break;
+                        case '4':
+                            Console.WriteLine("Write person id:");
+                            personID = Convert.ToInt32(Console.ReadLine());
+                            Console.WriteLine("Write debt amount:");
+                            debtAmount4 = Convert.ToDouble(Console.ReadLine());
+                            break;
+                    }
+                    debtDAL.Update(select, new Debt(id4, personID, DateTime.Now, debtAmount4));
+
+                    Console.WriteLine("Press key to contonue...");
+                    Console.ReadKey();
+                    break;
+                case '5':
+                    Console.WriteLine("Write debt id:");
+                    int id5 = Convert.ToInt32(Console.ReadLine());
+                    debtDAL.Delete(id5);
+                    break;
+                case 'q':
+                    break;
+                default:
+                    log.Warn("Wrong selection.");
+                    break;
+            }
+            
+        }
+
+        private Debt CreateDebt(int id, double debtAmont)
+        {
+            Debt debt = new Debt(id, DateTime.Now, debtAmont);
+            return debt;
         }
     }
 }

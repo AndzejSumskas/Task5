@@ -1,24 +1,15 @@
 ﻿using ClassLibrary;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClassLibraryTests
 {
-    [TestFixture]
+    [TestClass]
     public class PersonDALTest
     {
         PersonDAL personDAL = new PersonDAL();
 
-        [SetUp]
-        public void Setup()
-        {
-        }
-
-        [Test]
+        [TestMethod]
         public void GetPersons_CheckOrCorrectPerson()
         {
 
@@ -27,7 +18,7 @@ namespace ClassLibraryTests
             Assert.AreEqual(25, person.Id);
         }
 
-        [Test]
+        [TestMethod]
 
         public void TestAddingPerson_CheckOrExist()
         {

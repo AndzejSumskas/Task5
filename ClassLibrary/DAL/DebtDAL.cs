@@ -111,7 +111,44 @@ namespace ClassLibrary
             }
         }
 
-        public void Update(int id, char select, int personID, string date, double debtAmount)
+
+        public Debt GetSearchById(int ID)
+        {
+            using (SqlConnection connection = new SqlConnection(ConnetctionString))
+            {
+                connection.Open();
+                Debt debt = new Debt();
+                SqlCommand command = connection.CreateCommand();
+                command.Connection = connection;
+
+                try
+                {
+                    command.CommandText = $"Select ID, PERSON_ID, R_DATE, DEBT_AMOUNT FROM DEBTS WHERE ID  = @0";
+                    command.Parameters.AddWithValue("@0", ID);
+                    SqlDataReader dataReader = command.ExecuteReader();
+
+                    while (dataReader.Read())
+                    {
+                        debt.Id = Convert.ToInt32(dataReader.GetValue(0));
+                        debt.PersonId = Convert.ToInt32(dataReader.GetValue(1));
+                        debt.Date = Convert.ToDateTime(dataReader.GetValue(2));
+                        debt.Amount = Convert.ToDouble(dataReader.GetValue(3).ToString());    
+                    }
+                }
+
+                catch (Exception ex)
+                {
+                    log.Error(ex.GetType());
+                    log.Error(ex.Message);
+                }
+                connection.Close();
+                log.Info($"Search by id completed.");
+                return debt;
+            }
+        }
+
+
+        public void Update(char select, Debt debt)
         {
             using (SqlConnection connection = new SqlConnection(ConnetctionString))
             {
@@ -125,25 +162,25 @@ namespace ClassLibrary
                     {
                         case '1':
                             command.CommandText = $"UPDATE DEBTS SET PERSON_ID = @0 WHERE ID = @1";
-                            command.Parameters.AddWithValue("@0", personID);
-                            command.Parameters.AddWithValue("@1", id);
+                            command.Parameters.AddWithValue("@0", debt.PersonId);
+                            command.Parameters.AddWithValue("@1", debt.Id);
                             break;
                         case '2':
                             command.CommandText = $"UPDATE DEBTS SET SET R_DATE = @0 WHERE ID = @1";
-                            command.Parameters.AddWithValue("@0", date);
-                            command.Parameters.AddWithValue("@1", id);
+                            command.Parameters.AddWithValue("@0", debt.Date);
+                            command.Parameters.AddWithValue("@1", debt.Id);
                             break;
                         case '3':
                             command.CommandText = $"UPDATE DEBTS SET DEBT_AMOUNT = @0 WHERE ID = @1";
-                            command.Parameters.AddWithValue("@0", debtAmount);
-                            command.Parameters.AddWithValue("@1", id);
+                            command.Parameters.AddWithValue("@0", debt.Amount);
+                            command.Parameters.AddWithValue("@1", debt.Id);
                             break;
                         case '4':
                             command.CommandText = $"UPDATE DEBTS SET PERSON_ID = @0, R_DATE = @1, DEBT_AMOUNT = @2 WHERE ID = @3";
-                            command.Parameters.AddWithValue("@0", personID);
-                            command.Parameters.AddWithValue("@1", date);
-                            command.Parameters.AddWithValue("@2", debtAmount);
-                            command.Parameters.AddWithValue("@3", id);
+                            command.Parameters.AddWithValue("@0", debt.PersonId);
+                            command.Parameters.AddWithValue("@1", debt.Date);
+                            command.Parameters.AddWithValue("@2", debt.Amount);
+                            command.Parameters.AddWithValue("@3", debt.Id);
                             break;
                     }
                     command.ExecuteNonQuery();

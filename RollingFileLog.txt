@@ -252,3 +252,81 @@
 13:12:28,016 [Task5.AppController] INFO - Actions with Persons menu.
 13:13:13,571 [ClassLibrary.PersonDAL] INFO - Search by id completed.
 13:19:30,837 [Task5.AppController] INFO - The application has started.
+13:39:25,380 [Task5.AppController] INFO - The application has started.
+13:39:52,869 [Task5.AppController] INFO - The application has started.
+13:40:30,667 [ClassLibrary.DebtDAL] INFO - Created list from DB.
+14:00:37,420 [Task5.AppController] INFO - The application has started.
+14:00:54,999 [ClassLibrary.PersonDAL] INFO - Search by id completed.
+14:00:55,013 [ClassLibrary.DebtDAL] ERROR - System.Data.SqlClient.SqlException
+14:00:55,014 [ClassLibrary.DebtDAL] ERROR - The INSERT statement conflicted with the FOREIGN KEY constraint "fk_debt_person". The conflict occurred in database "C:\USERS\ANDZEJ\DATABASETEST.MDF", table "dbo.PERSONS", column 'ID'.
+The statement has been terminated.
+14:00:55,014 [ClassLibrary.DebtDAL] INFO - Added to DB with id = 0
+14:00:59,964 [ClassLibrary.PersonDAL] INFO - Search by id completed.
+14:00:59,969 [ClassLibrary.DebtDAL] ERROR - System.Data.SqlClient.SqlException
+14:00:59,969 [ClassLibrary.DebtDAL] ERROR - The INSERT statement conflicted with the FOREIGN KEY constraint "fk_debt_person". The conflict occurred in database "C:\USERS\ANDZEJ\DATABASETEST.MDF", table "dbo.PERSONS", column 'ID'.
+The statement has been terminated.
+14:00:59,969 [ClassLibrary.DebtDAL] INFO - Added to DB with id = 0
+14:01:00,535 [ClassLibrary.PersonDAL] INFO - Search by id completed.
+14:01:00,540 [ClassLibrary.DebtDAL] ERROR - System.Data.SqlClient.SqlException
+14:01:00,541 [ClassLibrary.DebtDAL] ERROR - The INSERT statement conflicted with the FOREIGN KEY constraint "fk_debt_person". The conflict occurred in database "C:\USERS\ANDZEJ\DATABASETEST.MDF", table "dbo.PERSONS", column 'ID'.
+The statement has been terminated.
+14:01:00,541 [ClassLibrary.DebtDAL] INFO - Added to DB with id = 0
+14:01:00,871 [ClassLibrary.PersonDAL] INFO - Search by id completed.
+14:01:00,876 [ClassLibrary.DebtDAL] ERROR - System.Data.SqlClient.SqlException
+14:01:00,876 [ClassLibrary.DebtDAL] ERROR - The INSERT statement conflicted with the FOREIGN KEY constraint "fk_debt_person". The conflict occurred in database "C:\USERS\ANDZEJ\DATABASETEST.MDF", table "dbo.PERSONS", column 'ID'.
+The statement has been terminated.
+14:01:00,876 [ClassLibrary.DebtDAL] INFO - Added to DB with id = 0
+14:01:01,174 [ClassLibrary.PersonDAL] INFO - Search by id completed.
+14:01:01,178 [ClassLibrary.DebtDAL] ERROR - System.Data.SqlClient.SqlException
+14:01:01,178 [ClassLibrary.DebtDAL] ERROR - The INSERT statement conflicted with the FOREIGN KEY constraint "fk_debt_person". The conflict occurred in database "C:\USERS\ANDZEJ\DATABASETEST.MDF", table "dbo.PERSONS", column 'ID'.
+The statement has been terminated.
+14:01:01,178 [ClassLibrary.DebtDAL] INFO - Added to DB with id = 0
+14:01:01,393 [ClassLibrary.PersonDAL] INFO - Search by id completed.
+14:01:01,398 [ClassLibrary.DebtDAL] ERROR - System.Data.SqlClient.SqlException
+14:01:01,398 [ClassLibrary.DebtDAL] ERROR - The INSERT statement conflicted with the FOREIGN KEY constraint "fk_debt_person". The conflict occurred in database "C:\USERS\ANDZEJ\DATABASETEST.MDF", table "dbo.PERSONS", column 'ID'.
+The statement has been terminated.
+14:01:01,398 [ClassLibrary.DebtDAL] INFO - Added to DB with id = 0
+14:01:05,524 [ClassLibrary.PersonDAL] INFO - Search by id completed.
+14:01:05,530 [ClassLibrary.DebtDAL] ERROR - System.Data.SqlClient.SqlException
+14:01:05,530 [ClassLibrary.DebtDAL] ERROR - The INSERT statement conflicted with the FOREIGN KEY constraint "fk_debt_person". The conflict occurred in database "C:\USERS\ANDZEJ\DATABASETEST.MDF", table "dbo.PERSONS", column 'ID'.
+The statement has been terminated.
+14:01:05,530 [ClassLibrary.DebtDAL] INFO - Added to DB with id = 0
+14:03:50,932 [Task5.AppController] INFO - The application has started.
+14:05:20,988 [ClassLibrary.PersonDAL] INFO - Search by id completed.
+14:05:31,875 [ClassLibrary.DebtDAL] ERROR - System.Data.SqlClient.SqlException
+14:05:31,876 [ClassLibrary.DebtDAL] ERROR - The INSERT statement conflicted with the FOREIGN KEY constraint "fk_debt_person". The conflict occurred in database "C:\USERS\ANDZEJ\DATABASETEST.MDF", table "dbo.PERSONS", column 'ID'.
+The statement has been terminated.
+14:05:31,876 [ClassLibrary.DebtDAL] INFO - Added to DB with id = 0
+14:06:29,485 [ClassLibrary.PersonDAL] INFO - Search by id completed.
+14:06:29,491 [ClassLibrary.DebtDAL] ERROR - System.Data.SqlClient.SqlException
+14:06:29,491 [ClassLibrary.DebtDAL] ERROR - The INSERT statement conflicted with the FOREIGN KEY constraint "fk_debt_person". The conflict occurred in database "C:\USERS\ANDZEJ\DATABASETEST.MDF", table "dbo.PERSONS", column 'ID'.
+The statement has been terminated.
+14:06:29,491 [ClassLibrary.DebtDAL] INFO - Added to DB with id = 0
+14:06:44,522 [ClassLibrary.PersonDAL] INFO - Search by id completed.
+14:07:09,571 [Task5.AppController] INFO - The application has started.
+14:07:12,533 [ClassLibrary.PersonDAL] INFO - Search by id completed.
+14:07:24,527 [ClassLibrary.PersonDAL] INFO - Search by id completed.
+14:15:18,774 [Task5.AppController] INFO - The application has started.
+14:15:25,889 [ClassLibrary.PersonDAL] INFO - Search by id completed.
+14:15:33,449 [ClassLibrary.PersonDAL] INFO - Search by id completed.
+14:15:33,458 [ClassLibrary.DebtDAL] INFO - Added to DB with id = 82
+14:16:18,396 [Task5.AppController] INFO - The application has started.
+14:16:24,996 [ClassLibrary.PersonDAL] INFO - Search by id completed.
+14:16:25,005 [ClassLibrary.DebtDAL] INFO - Added to DB with id = 83
+14:19:39,689 [Task5.AppController] INFO - The application has started.
+14:19:44,875 [ClassLibrary.DebtDAL] INFO - Search completed.
+14:19:56,857 [ClassLibrary.DebtDAL] INFO - Search completed.
+11:23:20,037 [Task5.AppController] INFO - The application has started.
+11:24:46,798 [ClassLibrary.DebtDAL] INFO - Data updated.
+11:33:05,784 [Task5.AppController] INFO - The application has started.
+11:33:06,340 [Task5.AppController] INFO - Actions with Debts menu.
+11:33:10,356 [Task5.AppController] WARN - Wrong selection.
+11:33:16,732 [Task5.AppController] INFO - Actions with Debts menu.
+11:33:44,160 [Task5.AppController] INFO - The application has started.
+11:33:45,532 [Task5.AppController] INFO - Actions with Debts menu.
+11:34:53,206 [Task5.AppController] INFO - The application has started.
+11:34:57,720 [Task5.AppController] INFO - Actions with Debts menu.
+11:35:05,872 [Task5.AppController] INFO - Actions with Debts menu.
+11:35:06,701 [Task5.AppController] INFO - Actions with Debts menu.
+11:35:07,239 [Task5.AppController] INFO - Actions with Debts menu.
+12:17:59,130 [Task5.AppController] INFO - The application has started.
