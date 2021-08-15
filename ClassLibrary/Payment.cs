@@ -13,6 +13,17 @@ namespace ClassLibrary
         public DateTime Date { get; set; }
         public double PaymentAmount { get; set; }
 
+        public Payment()
+        {
+        }
+
+        public Payment(int personId, DateTime date, double paymentAmount)
+        {
+            PersonId = personId;
+            Date = date;
+            PaymentAmount = paymentAmount;
+        }
+
         public Payment(int id, int personId, DateTime date, double paymentAmount)
         {
             Id = id;
@@ -20,5 +31,7 @@ namespace ClassLibrary
             Date = date;
             PaymentAmount = paymentAmount;
         }
+
+
     }
 }

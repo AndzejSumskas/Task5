@@ -62,7 +62,7 @@ namespace ClassLibrary
 
                 try
                 {
-                    command.CommandText = "INSERT INTO DEBTS(PERSON_ID, R_DATE, DEBT_AMOUNT) VALUES(@0,@1,@2); Select SCOPE_IDENTITY()";
+                    command.CommandText = "INSERT INTO PAYMENTS(PERSON_ID, R_DATE, PAYMENT_AMOUNT) VALUES(@0,@1,@2); Select SCOPE_IDENTITY()";
                     command.Parameters.AddWithValue("@0", payment.PersonId);
                     command.Parameters.AddWithValue("@1", payment.Date);
                     command.Parameters.AddWithValue("@2", payment.PaymentAmount);
@@ -111,6 +111,43 @@ namespace ClassLibrary
                 connection.Close();
                 log.Info($"Search completed.");
                 return data;
+            }
+        }
+
+        public Payment GetSearchById(int ID)
+        {
+            using (SqlConnection connection = new SqlConnection(ConnetctionString))
+            {
+                connection.Open();
+                Payment payment = new Payment();
+                SqlCommand command = connection.CreateCommand();
+                command.Connection = connection;
+
+                try
+                {
+                    command.CommandText = $"Select ID, PERSON_ID, R_DATE, PAYMENT_AMOUNT FROM PAYMENTS WHERE ID = @0";
+                    command.Parameters.AddWithValue("@0", ID);
+
+                    SqlDataReader dataReader = command.ExecuteReader();
+
+                    while (dataReader.Read())
+                    {
+                        payment.Id = Convert.ToInt32(dataReader.GetValue(0));
+                        payment.PersonId = Convert.ToInt32(dataReader.GetValue(1));
+                        payment.Date = Convert.ToDateTime(dataReader.GetValue(2));
+                        payment.PaymentAmount = Convert.ToDouble(dataReader.GetValue(3));
+                    }
+                    dataReader.Close();
+                }
+
+                catch (Exception ex)
+                {
+                    log.Error(ex.GetType());
+                    log.Error(ex.Message);
+                }
+                connection.Close();
+                log.Info($"Search completed.");
+                return payment;
             }
         }
 

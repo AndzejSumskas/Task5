@@ -111,7 +111,6 @@ namespace ClassLibrary
             }
         }
 
-
         public Debt GetSearchById(int ID)
         {
             using (SqlConnection connection = new SqlConnection(ConnetctionString))
@@ -132,7 +131,7 @@ namespace ClassLibrary
                         debt.Id = Convert.ToInt32(dataReader.GetValue(0));
                         debt.PersonId = Convert.ToInt32(dataReader.GetValue(1));
                         debt.Date = Convert.ToDateTime(dataReader.GetValue(2));
-                        debt.Amount = Convert.ToDouble(dataReader.GetValue(3).ToString());    
+                        debt.Amount = Convert.ToDouble(dataReader.GetValue(3));    
                     }
                 }
 
@@ -146,7 +145,6 @@ namespace ClassLibrary
                 return debt;
             }
         }
-
 
         public void Update(char select, Debt debt)
         {

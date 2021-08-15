@@ -1,4 +1,5 @@
-﻿using log4net;
+﻿using ClassLibrary;
+using log4net;
 using System;
 using System.Configuration;
 using System.IO;

@@ -10,7 +10,7 @@ namespace ClassLibraryTests
         PersonDAL personDAL = new PersonDAL();
 
         [TestMethod]
-        public void GetPersons_CheckOrCorrectPerson()
+        public void GetPerson_CheckOrCorrectPerson()
         {
 
             Person person = personDAL.GetSearchByID(25);

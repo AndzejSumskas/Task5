@@ -330,3 +330,24 @@ The statement has been terminated.
 11:35:06,701 [Task5.AppController] INFO - Actions with Debts menu.
 11:35:07,239 [Task5.AppController] INFO - Actions with Debts menu.
 12:17:59,130 [Task5.AppController] INFO - The application has started.
+17:34:56,245 [ClassLibrary.PaymentDAL] INFO - Added to DB with id = 87
+17:34:58,641 [ClassLibrary.PaymentDAL] INFO - Search completed.
+17:36:40,464 [ClassLibrary.PaymentDAL] INFO - Added to DB with id = 88
+17:39:35,428 [ClassLibrary.PaymentDAL] INFO - Added to DB with id = 89
+17:45:35,114 [Task5.AppController] INFO - The application has started.
+17:45:38,822 [Task5.AppController] INFO - Actions with Debts menu.
+17:45:45,408 [ClassLibrary.DebtDAL] INFO - Search completed.
+17:50:41,111 [ClassLibrary.PaymentDAL] INFO - Added to DB with id = 90
+17:50:57,409 [ClassLibrary.PaymentDAL] INFO - Search completed.
+17:56:58,501 [ClassLibrary.PaymentDAL] INFO - Added to DB with id = 91
+17:59:30,608 [ClassLibrary.PaymentDAL] ERROR - System.Data.SqlClient.SqlException
+17:59:30,614 [ClassLibrary.PaymentDAL] ERROR - Invalid column name 'DEBT_AMOUNT'.
+17:59:30,614 [ClassLibrary.PaymentDAL] INFO - Added to DB with id = 0
+18:00:10,226 [ClassLibrary.PaymentDAL] INFO - Added to DB with id = 45
+18:00:17,138 [ClassLibrary.PaymentDAL] INFO - Search completed.
+18:02:08,067 [Task5.AppController] INFO - The application has started.
+18:09:07,164 [ClassLibrary.PaymentDAL] INFO - Search completed.
+18:09:20,536 [ClassLibrary.PaymentDAL] INFO - Search completed.
+18:12:00,763 [Task5.AppController] INFO - The application has started.
+18:12:13,188 [ClassLibrary.PaymentDAL] INFO - Search completed.
+18:24:10,227 [Task5.AppController] INFO - The application has started.

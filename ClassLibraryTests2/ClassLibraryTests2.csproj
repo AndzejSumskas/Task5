@@ -55,7 +55,8 @@
   <ItemGroup>
     <Compile Include="PersonDALTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DebtDALTest1.cs" />
+    <Compile Include="DebtDALTest.cs" />
+    <Compile Include="PaymentDALTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
