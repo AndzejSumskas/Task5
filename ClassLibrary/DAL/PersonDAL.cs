@@ -54,6 +54,7 @@ namespace ClassLibrary
 
         public int Add(Person person)
         {
+            GetPath();
             using (SqlConnection connection = new SqlConnection(ConnetctionString))
             {
                 connection.Open();
@@ -116,6 +117,39 @@ namespace ClassLibrary
             }
         }
 
+        public List<Person> GetSearchListByID(int ID)
+        {
+            GetPath();
+            using (SqlConnection connection = new SqlConnection(ConnetctionString))
+            {
+                connection.Open();
+                List<Person> data = new List<Person>();
+                SqlCommand command = connection.CreateCommand();
+                command.Connection = connection;
+
+                try
+                {
+                    command.CommandText = $"SELECT ID,NAME,SURNAME,PHONENUMBER FROM PERSONS WHERE ID=@0";
+                    command.Parameters.AddWithValue("@0", ID);
+                    SqlDataReader dataReader = command.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        data.Add(new Person(Convert.ToInt32(dataReader.GetValue(0)), dataReader.GetValue(1).ToString(), dataReader.GetValue(2).ToString(), dataReader.GetValue(3).ToString()));
+                    }
+                    dataReader.Close();
+                }
+
+                catch (Exception ex)
+                {
+                    log.Error(ex.GetType());
+                    log.Error(ex.Message);
+                }
+                connection.Close();
+                log.Info($"Search completed.");
+                return data;
+            }
+        }
+
         public Person GetSearchByID(int id)
         {
             
@@ -155,6 +189,7 @@ namespace ClassLibrary
         }
         public void Update(int id, char select, string name, string surname, string phoneNumber)
         {
+            GetPath();
             using (SqlConnection connection = new SqlConnection(ConnetctionString))
             {
                 connection.Open();
@@ -204,6 +239,7 @@ namespace ClassLibrary
 
         public void Delete(int id)
         {
+            GetPath();
             using (SqlConnection connection = new SqlConnection(ConnetctionString))
             {
                 connection.Open();
