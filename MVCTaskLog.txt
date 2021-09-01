@@ -1,0 +1,61 @@
+
+2021-09-01 12:47:19,081 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-01 12:47:19,086 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-01 12:47:23,306 [ClassLibrary.PersonDAL] INFO - Search by id completed.
+2021-09-01 12:47:23,306 [MVCTask.Controllers.PersonController] INFO - Searching person to edit.
+2021-09-01 12:47:28,014 [ClassLibrary.PersonDAL] INFO - Data updated.
+2021-09-01 12:47:28,014 [MVCTask.Controllers.PersonController] INFO - Editing person.
+2021-09-01 12:47:28,023 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-01 12:47:28,023 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-01 12:47:29,886 [ClassLibrary.DebtDAL] INFO - Search completed.
+2021-09-01 12:47:29,886 [MVCTask.Controllers.PersonController] INFO - Getting list of person debts.
+2021-09-01 12:47:39,802 [ClassLibrary.PersonDAL] INFO - Search by id completed.
+2021-09-01 12:47:39,802 [MVCTask.Controllers.PersonController] INFO - Searching person to delete.
+2021-09-01 12:47:41,008 [ClassLibrary.PersonDAL] ERROR - System.Data.SqlClient.SqlException
+2021-09-01 12:47:41,009 [ClassLibrary.PersonDAL] ERROR - The DELETE statement conflicted with the REFERENCE constraint "FK__PAYMENTS__PERSON__0880433F". The conflict occurred in database "C:\USERS\ANDZEJ\DATABASETEST.MDF", table "dbo.PAYMENTS", column 'PERSON_ID'.
+The statement has been terminated.
+2021-09-01 12:47:41,009 [ClassLibrary.PersonDAL] INFO - Person was deleted.
+2021-09-01 12:47:41,009 [MVCTask.Controllers.PersonController] INFO - Deleting person.
+2021-09-01 12:47:41,013 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-01 12:47:41,013 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-01 12:47:46,834 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-01 12:48:02,649 [ClassLibrary.PersonDAL] INFO - Added to DB with id = 155
+2021-09-01 12:48:02,649 [MVCTask.Controllers.PersonController] INFO - Person created.
+2021-09-01 12:48:02,655 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-01 12:48:02,655 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-01 12:50:43,237 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-01 12:50:43,243 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-01 12:54:10,629 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-01 12:54:10,637 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-01 12:55:27,173 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-01 12:55:27,178 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-01 12:55:39,004 [ClassLibrary.DebtDAL] INFO - Search completed.
+2021-09-01 12:55:39,004 [MVCTask.Controllers.PersonController] INFO - Getting list of person debts.
+2021-09-01 12:55:56,221 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-01 12:55:56,221 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-01 12:58:12,421 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-01 12:58:12,427 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-01 12:58:27,460 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-01 12:58:27,465 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-01 13:01:20,232 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-01 13:01:20,238 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-01 13:01:42,862 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-01 13:01:42,868 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-01 13:02:15,997 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-01 13:02:16,002 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-01 13:04:05,192 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-01 13:04:05,197 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-01 13:07:26,821 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-01 13:07:26,826 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-01 13:07:40,345 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-01 13:07:40,351 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-01 13:09:23,069 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-01 13:09:23,074 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-01 13:09:50,754 [ClassLibrary.PersonDAL] INFO - Search by id completed.
+2021-09-01 13:09:50,754 [MVCTask.Controllers.PersonController] INFO - Searching person to delete.
+2021-09-01 13:09:56,520 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-01 13:10:01,503 [ClassLibrary.PersonDAL] INFO - Search by id completed.
+2021-09-01 13:10:01,503 [MVCTask.Controllers.PersonController] INFO - Searching person to delete.
+2021-09-01 13:10:03,078 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-01 13:10:21,080 [ClassLibrary.PersonDAL] INFO - Search by id completed.
+2021-09-01 13:10:21,080 [MVCTask.Controllers.PersonController] INFO - Searching person to edit.

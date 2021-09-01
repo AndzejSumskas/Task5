@@ -81,6 +81,8 @@ namespace ClassLibrary
 
         public List<Debt> GetSearchList(int personID)
         {
+            GetPath();
+
             using (SqlConnection connection = new SqlConnection(ConnetctionString))
             {
                 connection.Open();
@@ -113,6 +115,8 @@ namespace ClassLibrary
 
         public Debt GetSearchById(int ID)
         {
+            GetPath();
+
             using (SqlConnection connection = new SqlConnection(ConnetctionString))
             {
                 connection.Open();
@@ -217,6 +221,10 @@ namespace ClassLibrary
                 connection.Close();
                 log.Info("Debt was deleted.");
             }         
+        }
+        public void GetPath()
+        {
+            ConnetctionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Andzej\DataBaseTest.mdf;Integrated Security=True;Connect Timeout=30";
         }
     }
 }
