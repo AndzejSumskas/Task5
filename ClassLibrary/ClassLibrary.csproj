@@ -53,6 +53,7 @@
     <Compile Include="DAL\ExtraDAL.cs" />
     <Compile Include="DAL\PaymentDAL.cs" />
     <Compile Include="Debt.cs" />
+    <Compile Include="Path.cs" />
     <Compile Include="Payment.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="DAL\PersonDAL.cs" />

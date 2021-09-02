@@ -12,14 +12,16 @@ namespace ClassLibrary
 {
     public class PersonDAL
     {
+        private Path path = new Path();
+
         public string ConnetctionString = ConfigurationManager.AppSettings.Get("PerPath");
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(PersonDAL));
 
         public List<Person> GetList()
         {
-            GetPath();
-            using (SqlConnection connection = new SqlConnection(ConnetctionString))
+            //GetPath();
+            using (SqlConnection connection = new SqlConnection(path.PathToDB))
             {
                 connection.Open();
 
