@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Windows;
+using System.Web.UI.WebControls;
+using System.Web.UI;
 
 [assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.config")]
 
@@ -73,13 +75,20 @@ namespace MVCTask.Controllers
         [HttpPost]
         public ActionResult Edit(Person person)
         {
-            //update student in DB using EntityFramework in real-life application
-
-            //update list by removing old student and adding updated student for demo purpose
-            PersonDAL personDAL = new PersonDAL();
-            personDAL.Update(person.Id, '4', person.Name, person.SurName, person.PhoneNumber);
-            log.Info("Editing person.");
-            return RedirectToAction("GetPersons");
+            if (person.Name == null || person.SurName == null || person.PhoneNumber == null)
+            {
+                ViewBag.Message = "Some fields are empty!";
+                log.Warn("Some fields are empty!");
+                return View(person);
+            }
+            else
+            {
+                PersonDAL personDAL = new PersonDAL();
+                personDAL.Update(person.Id, '4', person.Name, person.SurName, person.PhoneNumber);
+                log.Info("Editing person.");
+                return RedirectToAction("GetPersons");
+            }
+            
         }
 
         public ActionResult Create()
@@ -90,16 +99,16 @@ namespace MVCTask.Controllers
             return View(person);
         }
 
+
+
         [HttpPost]
         public ActionResult Create(Person person)
         {
-            if(person.Name == null || person.SurName == null || person.PhoneNumber == null)
+            if (person.Name == null || person.SurName == null || person.PhoneNumber == null)
             {
-                string message = "Some fields are empty!!!";
-                MessageBox.Show(message);
-                RedirectToAction("GetPersons");
+                ViewBag.Message = "Some fields are empty!";
                 log.Warn("Some fields are empty!");
-                return RedirectToAction("Create");
+                return View(person);
             }
             else
             {
@@ -107,7 +116,7 @@ namespace MVCTask.Controllers
                 personDAL.Add(person);
                 log.Info("Person created.");
                 return RedirectToAction("GetPersons");
-            }  
+            }
         }
 
         public ActionResult DebtView(int id)

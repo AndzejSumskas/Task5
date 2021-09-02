@@ -10,13 +10,13 @@ namespace ClassLibrary
 {
     public class PaymentDAL
     {
-        private string ConnetctionString = ConfigurationManager.AppSettings.Get("PerPath");
+        private Path path = new Path();
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(PaymentDAL));
 
         public List<Payment> GetList()
         {
-            using (SqlConnection connection = new SqlConnection(ConnetctionString))
+            using (SqlConnection connection = new SqlConnection(path.PathToDB))
             {
                 connection.Open();
 
@@ -52,7 +52,7 @@ namespace ClassLibrary
 
         public int Add(Payment payment)
         {
-            using (SqlConnection connection = new SqlConnection(ConnetctionString))
+            using (SqlConnection connection = new SqlConnection(path.PathToDB))
             {
                 connection.Open();
 
@@ -82,7 +82,7 @@ namespace ClassLibrary
 
         public List<Payment> GetSearchList(int personID)
         {
-            using (SqlConnection connection = new SqlConnection(ConnetctionString))
+            using (SqlConnection connection = new SqlConnection(path.PathToDB))
             {
                 connection.Open();
                 List<Payment> data = new List<Payment>();
@@ -116,7 +116,7 @@ namespace ClassLibrary
 
         public Payment GetSearchById(int ID)
         {
-            using (SqlConnection connection = new SqlConnection(ConnetctionString))
+            using (SqlConnection connection = new SqlConnection(path.PathToDB))
             {
                 connection.Open();
                 Payment payment = new Payment();
@@ -153,7 +153,7 @@ namespace ClassLibrary
 
         public void Update(int id, char select, int personID, string date, double amount)
         {
-            using (SqlConnection connection = new SqlConnection(ConnetctionString))
+            using (SqlConnection connection = new SqlConnection(path.PathToDB))
             {
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
@@ -201,7 +201,7 @@ namespace ClassLibrary
 
         public void Delete(int id)
         {
-            using (SqlConnection connection = new SqlConnection(ConnetctionString))
+            using (SqlConnection connection = new SqlConnection(path.PathToDB))
             {
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();

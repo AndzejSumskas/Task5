@@ -10,13 +10,13 @@ namespace ClassLibrary
 {
     public class DebtDAL
     {
-        private string ConnetctionString = ConfigurationManager.AppSettings.Get("PerPath");
+        private Path path = new Path();
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(DebtDAL));
 
         public List<Debt> GetList()
         {
-            using (SqlConnection connection = new SqlConnection(ConnetctionString))
+            using (SqlConnection connection = new SqlConnection(path.PathToDB))
             {
                 connection.Open();
 
@@ -50,7 +50,7 @@ namespace ClassLibrary
 
         public int Add(Debt debt)
         {
-            using (SqlConnection connection = new SqlConnection(ConnetctionString))
+            using (SqlConnection connection = new SqlConnection(path.PathToDB))
             {
                 connection.Open();
 
@@ -81,9 +81,7 @@ namespace ClassLibrary
 
         public List<Debt> GetSearchList(int personID)
         {
-            GetPath();
-
-            using (SqlConnection connection = new SqlConnection(ConnetctionString))
+            using (SqlConnection connection = new SqlConnection(path.PathToDB))
             {
                 connection.Open();
                 List<Debt> data = new List<Debt>();
@@ -115,9 +113,7 @@ namespace ClassLibrary
 
         public Debt GetSearchById(int ID)
         {
-            GetPath();
-
-            using (SqlConnection connection = new SqlConnection(ConnetctionString))
+            using (SqlConnection connection = new SqlConnection(path.PathToDB))
             {
                 connection.Open();
                 Debt debt = new Debt();
@@ -152,7 +148,7 @@ namespace ClassLibrary
 
         public void Update(char select, Debt debt)
         {
-            using (SqlConnection connection = new SqlConnection(ConnetctionString))
+            using (SqlConnection connection = new SqlConnection(path.PathToDB))
             {
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
@@ -200,7 +196,7 @@ namespace ClassLibrary
 
         public void Delete(int id)
         {
-            using (SqlConnection connection = new SqlConnection(ConnetctionString))
+            using (SqlConnection connection = new SqlConnection(path.PathToDB))
             {
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
@@ -221,10 +217,6 @@ namespace ClassLibrary
                 connection.Close();
                 log.Info("Debt was deleted.");
             }         
-        }
-        public void GetPath()
-        {
-            ConnetctionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Andzej\DataBaseTest.mdf;Integrated Security=True;Connect Timeout=30";
-        }
+        }      
     }
 }

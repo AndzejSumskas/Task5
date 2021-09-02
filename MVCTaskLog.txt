@@ -85,3 +85,228 @@ The statement has been terminated.
 2021-09-01 18:46:22,301 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
 2021-09-02 08:48:52,220 [ClassLibrary.PersonDAL] INFO - Created list from DB.
 2021-09-02 08:48:52,228 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-02 08:56:23,537 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-02 08:56:23,542 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-02 08:56:32,690 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 08:56:37,894 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 08:56:37,909 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:20:01,009 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-02 09:20:01,015 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-02 09:20:04,939 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:20:10,860 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 09:20:10,879 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:29:38,425 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-02 09:29:38,430 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-02 09:29:43,122 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:29:44,539 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 09:29:44,545 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:31:19,911 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-02 09:31:19,916 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-02 09:31:22,483 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:32:09,529 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:32:51,292 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 09:32:51,300 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:33:06,521 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:33:09,422 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 09:33:09,428 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:33:10,881 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 09:33:10,890 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:53:06,830 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-02 09:53:06,836 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-02 09:53:08,376 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:53:11,701 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 09:53:11,707 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:53:13,540 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 09:53:13,544 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:53:14,093 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 09:53:14,098 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:57:02,465 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-02 09:57:02,471 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-02 09:57:04,668 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:57:05,726 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 09:57:05,733 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:57:08,252 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 09:57:08,255 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:57:09,020 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 09:57:09,023 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:57:09,808 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 09:57:09,814 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:57:10,338 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 09:57:10,343 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:57:10,727 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 09:57:10,730 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:57:10,937 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 09:57:10,941 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:57:11,104 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 09:57:11,107 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:57:11,258 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 09:57:11,263 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:57:11,407 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 09:57:11,412 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:57:11,560 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 09:57:11,564 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:57:11,707 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 09:57:11,712 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:57:13,865 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 09:57:13,870 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:57:14,285 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 09:57:14,289 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:57:14,509 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 09:57:14,513 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:57:14,684 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 09:57:14,689 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:57:14,855 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 09:57:14,860 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:57:15,007 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 09:57:15,011 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:57:15,163 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 09:57:15,166 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:57:15,309 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 09:57:15,313 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:57:15,424 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 09:57:15,429 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:57:15,563 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 09:57:15,567 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:57:16,270 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 09:57:16,273 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:57:16,411 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 09:57:16,416 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:57:16,532 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 09:57:16,536 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:57:16,662 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 09:57:16,666 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:57:16,795 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 09:57:16,800 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:57:16,924 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 09:57:16,928 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:57:17,074 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 09:57:17,079 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:57:20,562 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 09:57:20,566 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:58:01,161 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 09:58:01,165 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:58:51,372 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-02 09:58:51,378 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-02 09:59:01,570 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 09:59:28,590 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 09:59:29,917 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 10:02:39,157 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-02 10:02:39,164 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-02 10:02:42,283 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 10:02:46,927 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 10:02:46,941 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 10:02:54,461 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 10:02:54,806 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 10:07:04,661 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-02 10:07:04,666 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-02 10:07:06,829 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 10:07:19,218 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 10:07:38,339 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 10:09:22,146 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-02 10:09:22,152 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-02 10:09:24,054 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 10:09:29,675 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 10:10:51,462 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-02 10:10:51,469 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-02 10:10:55,612 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 10:10:59,354 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 10:11:23,202 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 10:11:28,978 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 10:14:33,588 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-02 10:14:33,594 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-02 10:14:36,069 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 10:14:41,236 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 10:15:30,581 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 10:16:56,319 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-02 10:16:56,324 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-02 10:16:57,609 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 10:17:27,903 [ClassLibrary.PersonDAL] INFO - Added to DB with id = 156
+2021-09-02 10:17:27,903 [MVCTask.Controllers.PersonController] INFO - Person created.
+2021-09-02 10:17:27,912 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-02 10:17:27,912 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-02 10:17:30,744 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 10:17:32,051 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 10:17:49,841 [ClassLibrary.PersonDAL] INFO - Added to DB with id = 157
+2021-09-02 10:17:49,841 [MVCTask.Controllers.PersonController] INFO - Person created.
+2021-09-02 10:17:49,846 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-02 10:17:49,846 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-02 10:17:56,617 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 10:17:57,743 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 10:17:59,855 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 10:24:36,154 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-02 10:24:36,162 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-02 10:24:40,369 [ClassLibrary.PersonDAL] INFO - Search by id completed.
+2021-09-02 10:24:40,369 [MVCTask.Controllers.PersonController] INFO - Searching person to edit.
+2021-09-02 10:24:43,017 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 10:24:43,029 [ClassLibrary.PersonDAL] INFO - Search by id completed.
+2021-09-02 10:24:43,029 [MVCTask.Controllers.PersonController] INFO - Searching person to edit.
+2021-09-02 10:25:12,955 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 10:25:17,018 [ClassLibrary.PersonDAL] INFO - Search by id completed.
+2021-09-02 10:25:17,018 [MVCTask.Controllers.PersonController] INFO - Searching person to edit.
+2021-09-02 10:26:13,995 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-02 10:26:14,000 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-02 10:26:19,942 [ClassLibrary.PersonDAL] INFO - Search by id completed.
+2021-09-02 10:26:19,942 [MVCTask.Controllers.PersonController] INFO - Searching person to edit.
+2021-09-02 10:26:41,157 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 10:26:44,358 [ClassLibrary.PersonDAL] INFO - Search by id completed.
+2021-09-02 10:26:44,358 [MVCTask.Controllers.PersonController] INFO - Searching person to edit.
+2021-09-02 10:27:44,816 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-02 10:27:44,822 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-02 10:27:51,477 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 10:27:58,283 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 10:27:58,292 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 10:28:16,557 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 10:28:16,562 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 10:28:59,759 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-02 10:28:59,765 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-02 10:29:11,701 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 10:29:18,105 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 10:29:18,116 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 10:29:59,636 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 10:30:18,572 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 10:31:31,490 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-02 10:31:31,496 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-02 10:31:35,129 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 10:31:42,550 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 10:31:42,562 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 10:32:57,560 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-02 10:32:57,566 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-02 10:33:01,975 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 10:33:17,696 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 10:33:17,715 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 10:34:11,084 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 10:34:22,598 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 10:34:22,605 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 10:35:09,045 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-02 10:35:09,051 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-02 10:35:10,459 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 10:35:32,019 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 10:35:33,907 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 10:35:51,809 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-02 10:35:51,818 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-02 10:35:54,492 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 10:36:01,172 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 10:36:01,185 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 10:37:02,523 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-02 10:37:02,528 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-02 10:37:04,056 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 10:37:28,702 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 10:37:58,515 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-02 10:37:58,521 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-02 10:38:00,114 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 10:38:06,069 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 10:39:36,001 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-02 10:39:36,007 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-02 10:39:37,967 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 10:39:48,903 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-02 10:39:48,903 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-02 10:39:51,298 [ClassLibrary.PersonDAL] INFO - Search by id completed.
+2021-09-02 10:39:51,298 [MVCTask.Controllers.PersonController] INFO - Searching person to edit.
+2021-09-02 10:39:56,424 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 10:40:09,023 [ClassLibrary.PersonDAL] INFO - Data updated.
+2021-09-02 10:40:09,023 [MVCTask.Controllers.PersonController] INFO - Editing person.
+2021-09-02 10:40:09,030 [ClassLibrary.PersonDAL] INFO - Created list from DB.
+2021-09-02 10:40:09,030 [MVCTask.Controllers.PersonController] INFO - Getting list of persons.
+2021-09-02 10:40:15,356 [MVCTask.Controllers.PersonController] INFO - Createing person.
+2021-09-02 10:40:21,835 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!
+2021-09-02 10:40:28,189 [MVCTask.Controllers.PersonController] WARN - Some fields are empty!

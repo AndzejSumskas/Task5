@@ -14,13 +14,10 @@ namespace ClassLibrary
     {
         private Path path = new Path();
 
-        public string ConnetctionString = ConfigurationManager.AppSettings.Get("PerPath");
-
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(PersonDAL));
 
         public List<Person> GetList()
         {
-            //GetPath();
             using (SqlConnection connection = new SqlConnection(path.PathToDB))
             {
                 connection.Open();
@@ -56,8 +53,7 @@ namespace ClassLibrary
 
         public int Add(Person person)
         {
-            GetPath();
-            using (SqlConnection connection = new SqlConnection(ConnetctionString))
+            using (SqlConnection connection = new SqlConnection(path.PathToDB))
             {
                 connection.Open();
 
@@ -87,7 +83,7 @@ namespace ClassLibrary
 
         public List<Person> GetSearchList(string search)
         {
-            using (SqlConnection connection = new SqlConnection(ConnetctionString))
+            using (SqlConnection connection = new SqlConnection(path.PathToDB))
             {
                 connection.Open();
                 List<Person> data = new List<Person>();
@@ -121,8 +117,7 @@ namespace ClassLibrary
 
         public List<Person> GetSearchListByID(int ID)
         {
-            GetPath();
-            using (SqlConnection connection = new SqlConnection(ConnetctionString))
+            using (SqlConnection connection = new SqlConnection(path.PathToDB))
             {
                 connection.Open();
                 List<Person> data = new List<Person>();
@@ -154,9 +149,7 @@ namespace ClassLibrary
 
         public Person GetSearchByID(int id)
         {
-            
-            GetPath();
-            using (SqlConnection connection = new SqlConnection(ConnetctionString))
+            using (SqlConnection connection = new SqlConnection(path.PathToDB))
             {
                 connection.Open();
                 Person person = new Person();
@@ -191,8 +184,7 @@ namespace ClassLibrary
         }
         public void Update(int id, char select, string name, string surname, string phoneNumber)
         {
-            GetPath();
-            using (SqlConnection connection = new SqlConnection(ConnetctionString))
+            using (SqlConnection connection = new SqlConnection(path.PathToDB))
             {
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
@@ -241,8 +233,7 @@ namespace ClassLibrary
 
         public void Delete(int id)
         {
-            GetPath();
-            using (SqlConnection connection = new SqlConnection(ConnetctionString))
+            using (SqlConnection connection = new SqlConnection(path.PathToDB))
             {
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
@@ -264,9 +255,6 @@ namespace ClassLibrary
                 log.Info("Person was deleted.");
             }
         }
-        public void GetPath()
-        {
-            ConnetctionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Andzej\DataBaseTest.mdf;Integrated Security=True;Connect Timeout=30";
-        }
+        
     }
 }

@@ -50,5 +50,14 @@
 }
 
 <div>
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert("Some fields are empty!");
+            };
+
+        </script>
+    }
     @Html.ActionLink("Back to List", "Index")
 </div>
